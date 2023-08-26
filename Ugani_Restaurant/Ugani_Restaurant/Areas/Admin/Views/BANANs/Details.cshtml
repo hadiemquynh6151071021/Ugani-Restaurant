@@ -1,0 +1,27 @@
+﻿@model Ugani_Restaurant.Models.BANAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BANAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LOAIKHONGGIAN.TENLOAIKHONGGIAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOAIKHONGGIAN.TENLOAIKHONGGIAN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MABAN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

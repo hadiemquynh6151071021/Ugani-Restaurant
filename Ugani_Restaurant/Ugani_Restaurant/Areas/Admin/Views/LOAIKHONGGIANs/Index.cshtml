@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Ugani_Restaurant.Models.LOAIKHONGGIAN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENLOAIKHONGGIAN)
+        </th>
+        <th width="40%">
+            @Html.DisplayNameFor(model => model.IMG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DONGIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DVT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENLOAIKHONGGIAN)
+        </td>
+        <td width="40%">
+            <img src="~/Content/khonggian/@item.IMG" width="40%" height="40%"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DONGIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DVT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MALOAIKHONGGIAN }, new { @class = "btn btn-primary" })|
+            @Html.ActionLink("Delete", "Delete", new { id = item.MALOAIKHONGGIAN }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

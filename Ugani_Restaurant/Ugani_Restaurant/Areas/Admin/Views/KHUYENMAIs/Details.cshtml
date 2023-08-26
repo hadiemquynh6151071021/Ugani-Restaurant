@@ -1,0 +1,51 @@
+﻿@model Ugani_Restaurant.Models.KHUYENMAI
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KHUYENMAI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TENIMG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENIMG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TILE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TILE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYBATDAU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYBATDAU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYKETTHUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYKETTHUC)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MAKM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
