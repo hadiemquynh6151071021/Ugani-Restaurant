@@ -10,17 +10,12 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class BANANsController : Controller
     {
         private UGANI_1Entities db = new UGANI_1Entities();
 
-        public ActionResult RenderLOAIKHONGGIAN()
-        {
-            List<LOAIKHONGGIAN> lOAIKHONGGIANs = db.LOAIKHONGGIANs.ToList();
-            return PartialView("LOAIKHONGGIAN_ls", lOAIKHONGGIANs);
-        }
-        
+        [AllowAnonymous]
         public ActionResult LoadBANANsById(int CatId)
         {
             List<BANAN> bANANs = db.BANANs.Where(m => m.MAKHONGGIAN == CatId).ToList();

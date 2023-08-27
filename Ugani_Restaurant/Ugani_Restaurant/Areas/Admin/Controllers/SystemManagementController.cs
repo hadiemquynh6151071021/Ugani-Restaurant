@@ -7,7 +7,7 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,Employment")]
     public class SystemManagementController : Controller
     {
 
@@ -17,7 +17,18 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         {
             return View();
         }
-       
+
+        public ActionResult RenderLOAIMONAN()
+        {
+            List<LOAIMON> lOAIMONs = db.LOAIMONs.ToList();
+            return PartialView("LOAIMONAN_ls", lOAIMONs);
+        }
+
+        public ActionResult RenderLOAIKHONGGIAN()
+        {
+            List<LOAIKHONGGIAN> lOAIKHONGGIANs = db.LOAIKHONGGIANs.ToList();
+            return PartialView("LOAIKHONGGIAN_ls", lOAIKHONGGIANs);
+        }
         
     }
 }

@@ -15,7 +15,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TENLOAIKHONGGIAN)
         </th>
-        <th width="40%">
+        <th width="30%" height="30%">
             @Html.DisplayNameFor(model => model.IMG)
         </th>
         <th>
@@ -27,7 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DVT)
         </th>
-        <th></th>
+        <th>Tác vụ</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -35,8 +35,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.TENLOAIKHONGGIAN)
         </td>
-        <td width="40%">
-            <img src="~/Content/khonggian/@item.IMG" width="40%" height="40%"/>
+        <td>
+            <img src="~/Content/khonggian/@item.IMG" class="img-fluid"/>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MOTA)

@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var user = User.Identity.Name;
+    var isAdmin = User.IsInRole("Admin");
 }
+
 
 <h2>Index</h2>
 
@@ -24,28 +27,35 @@
         <th>
             @Html.DisplayNameFor(model => model.NGAYKETTHUC)
         </th>
-        <th></th>
+        @if (isAdmin)
+        {
+            <td>Tác vụ</td>
+        }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TENIMG)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TILE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYBATDAU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYKETTHUC)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MAKM }, new { @class = "btn btn-primary" })) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MAKM }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TENIMG)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TILE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NGAYBATDAU)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NGAYKETTHUC)
+    </td>
+    @if (isAdmin)
+    {
+<td>
+    @Html.ActionLink("Edit", "Edit", new { id = item.MAKM }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.MAKM }, new { @class = "btn btn-danger" })
+</td>
+    }
+</tr>
+    }
 
 </table>

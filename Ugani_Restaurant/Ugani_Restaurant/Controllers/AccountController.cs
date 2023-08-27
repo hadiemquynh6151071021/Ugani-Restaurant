@@ -87,7 +87,7 @@ namespace Ugani_Restaurant.Controllers
                     }
                     else if (await UserManager.IsInRoleAsync(user.Id, "Employment"))
                     {
-                        return RedirectToAction("Index", "KHUYENMAIs", new { area = "Admin" });
+                        return RedirectToAction("Index", "SystemManagement", new { area = "Admin" });
                     }
                     else if (await UserManager.IsInRoleAsync(user.Id, "Customer"))
                     {

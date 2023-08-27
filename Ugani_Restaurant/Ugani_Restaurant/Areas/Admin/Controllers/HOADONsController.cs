@@ -10,6 +10,7 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin,Employment")]
     public class HOADONsController : Controller
     {
         private UGANI_1Entities db = new UGANI_1Entities();

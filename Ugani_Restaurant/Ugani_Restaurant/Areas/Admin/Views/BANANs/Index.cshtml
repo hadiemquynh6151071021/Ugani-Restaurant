@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Ugani_Restaurant.Models.BANAN>
-
+@{ 
+    var user = User.Identity.Name;
+    var isAdmin = User.IsInRole("Admin");
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -11,7 +14,10 @@
         <th>
             @Html.DisplayNameFor(model => model.LOAIKHONGGIAN.TENLOAIKHONGGIAN)
         </th>
-        <th></th>
+        @if (isAdmin)
+        {
+            <td>Tác vụ</td>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -22,10 +28,14 @@
     <td>
         @Html.DisplayFor(modelItem => item.LOAIKHONGGIAN.TENLOAIKHONGGIAN)
     </td>
+    @if (isAdmin)
+    {
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.MABAN.Trim() }, new { @class = "btn btn-primary" }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.MABAN.Trim() }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Edit", "Edit", new { id = item.MABAN }, new {@class="btn btn-primary" }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MABAN }, new { @class = "btn btn-danger" })
     </td>
+    }
+    
 </tr>
 }
 

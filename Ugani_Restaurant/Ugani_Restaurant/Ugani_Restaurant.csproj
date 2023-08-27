@@ -169,9 +169,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin2\Admin2AreaRegistration.cs" />
-    <Compile Include="Areas\Admin2\Controllers\BANANsController.cs" />
-    <Compile Include="Areas\Admin2\Controllers\HOADONsController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
@@ -252,6 +249,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminCSS\style.css">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -409,8 +411,8 @@
     <Content Include="Areas\Admin\Views\MONANs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\MONANs\LOAIMONAN_ls.cshtml" />
-    <Content Include="Areas\Admin\Views\BANANs\LOAIKHONGGIAN_ls.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemManagement\LOAIMONAN_ls.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemManagement\LOAIKHONGGIAN_ls.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Delete.cshtml" />
@@ -428,17 +430,10 @@
     <Content Include="Areas\Admin\Views\HOADONs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HOADONs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AccountAdmin\Login.cshtml" />
-    <Content Include="Areas\Admin2\Views\web.config" />
-    <Content Include="Areas\Admin2\Views\BANANs\Create.cshtml" />
-    <Content Include="Areas\Admin2\Views\BANANs\Delete.cshtml" />
-    <Content Include="Areas\Admin2\Views\BANANs\Details.cshtml" />
-    <Content Include="Areas\Admin2\Views\BANANs\Edit.cshtml" />
-    <Content Include="Areas\Admin2\Views\BANANs\Index.cshtml" />
-    <Content Include="Areas\Admin2\Views\HOADONs\Create.cshtml" />
-    <Content Include="Areas\Admin2\Views\HOADONs\Delete.cshtml" />
-    <Content Include="Areas\Admin2\Views\HOADONs\Details.cshtml" />
-    <Content Include="Areas\Admin2\Views\HOADONs\Edit.cshtml" />
-    <Content Include="Areas\Admin2\Views\HOADONs\Index.cshtml" />
+    <Content Include="Content\AdminCSS\style.scss">
+      <Generator>SassTranspiler</Generator>
+      <LastGenOutput>style.css</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chart\chart-area-demo.js" />
     <Content Include="Scripts\chart\chart-pie-demo.js" />
@@ -495,8 +490,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin2\Data\" />
-    <Folder Include="Areas\Admin2\Views\Shared\" />
     <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>

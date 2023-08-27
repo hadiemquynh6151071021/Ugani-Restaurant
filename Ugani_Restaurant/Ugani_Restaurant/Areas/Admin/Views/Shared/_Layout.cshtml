@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    var user = User.Identity.Name;
+    var isAdmin = User.IsInRole("Admin");
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -22,8 +26,8 @@
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.bundle.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/AdminCSS/style.css" rel="stylesheet" />
+
 
 </head>
 <body id="page-top">
@@ -52,6 +56,7 @@
                 </a>
             </li>
 
+
             <li class="nav-item active">
                 <a class="nav-link" href="/admin/AccountAdmin/Create">
                     <span>Tạo tài khoản</span>
@@ -65,64 +70,119 @@
             <div class="sidebar-heading">
                 Quản lý danh mục
             </div>
+            @if (isAdmin)
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Bàn ăn</span>
+                    </a>
+                    @Html.Action("RenderLOAIKHONGGIAN", "SystemManagement")
+                    @*thêm code*@
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/loaimons">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Loại món</span>
+                    </a>
+                </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <span class="material-symbols-outlined">
-                        fiber_manual_record
-                    </span>
-                    <span>Bàn ăn</span>
-                </a>
-                @Html.Action("RenderLOAIKHONGGIAN", "BANANs")
-                @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Loại bàn</h6>
-                    <a class="collapse-item" href="/admin/banans/listvip">VIP</a>
-                    <a class="collapse-item" href="/admin/banans/listsimple">Thường</a>
-                </div>
-            </div>*@
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/loaikhonggians">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Loại không gian</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Món ăn</span>
+                    </a>
+                    @Html.Action("RenderLOAIMONAN", "SystemManagement")
+                    @*thêm code*@
+                </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/loaimons">
-                    <span class="material-symbols-outlined">
-                        fiber_manual_record
-                    </span>
-                    <span>Loại món</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/khuyenmais">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Khuyến mãi</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Bàn ăn</span>
+                    </a>
+                    @Html.Action("RenderLOAIKHONGGIAN", "SystemManagement")
+                    @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Loại bàn</h6>
+                                <a class="collapse-item" href="/admin/banans/listvip">VIP</a>
+                                <a class="collapse-item" href="/admin/banans/listsimple">Thường</a>
+                            </div>
+                        </div>*@
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/loaikhonggians">
-                    <span class="material-symbols-outlined">
-                        fiber_manual_record
-                    </span>
-                    <span>Loại không gian</span>
-                </a>
-            </li>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                @*<li class="nav-item">
+                        <a class="nav-link collapsed" href="/admin/loaimons">
+                            <span class="material-symbols-outlined">
+                                fiber_manual_record
+                            </span>
+                            <span>Loại món</span>
+                        </a>
+                    </li>*@
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                   aria-expanded="true" aria-controls="collapseThree">
-                    <span class="material-symbols-outlined">
-                        fiber_manual_record
-                    </span>
-                    <span>Món ăn</span>
-                </a>
-                @Html.Action("RenderLOAIMONAN", "MONANs")
-            </li>
+                @*<li class="nav-item">
+                        <a class="nav-link collapsed" href="/admin/loaikhonggians">
+                            <span class="material-symbols-outlined">
+                                fiber_manual_record
+                            </span>
+                            <span>Loại không gian</span>
+                        </a>
+                    </li>*@
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/khuyenmais">
-                    <span class="material-symbols-outlined">
-                        fiber_manual_record
-                    </span>
-                    <span>Khuyến mãi</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Món ăn</span>
+                    </a>
+                    @Html.Action("RenderLOAIMONAN", "SystemManagement")
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/khuyenmais/index">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Khuyến mãi</span>
+                    </a>
+                </li>
+            }
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -144,34 +204,34 @@
 
             <!-- Nav Item - Charts -->
             <!--<li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <span class="material-symbols-outlined">
-                show_chart
-            </span>
-            <span>Biểu đồ</span>
-        </a>
-    </li>-->
+                <a class="nav-link" href="charts.html">
+                    <span class="material-symbols-outlined">
+                        show_chart
+                    </span>
+                    <span>Biểu đồ</span>
+                </a>
+            </li>-->
             <!-- Nav Item - Tables -->
             <!--<li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
-        </a>
-    </li>-->
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>-->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             @*<div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>*@
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>*@
 
             <!-- Sidebar Message -->
             @*<div class="sidebar-card d-none d-lg-flex">
-            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-        </div>*@
+                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+                </div>*@
 
         </ul>
         <!-- End of Sidebar -->
@@ -458,6 +518,8 @@
     <script src="~/Scripts/chart/chart-pie-demo.js"></script>
 
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>
