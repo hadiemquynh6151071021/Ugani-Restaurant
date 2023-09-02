@@ -170,7 +170,7 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = UserManager.FindById(model.UserId);
+                var user = UserManager.FindById(model.UserId.Trim());
                 if (user == null)
                 {
                     return HttpNotFound();
