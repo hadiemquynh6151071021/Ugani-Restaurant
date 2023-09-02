@@ -46,6 +46,7 @@ namespace Ugani_Restaurant.Models
         public string Email { get; set; }
     }
 
+
     public class LoginViewModel
     {
         [Required]
@@ -91,6 +92,16 @@ namespace Ugani_Restaurant.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class EditRoleViewModel
+    {
+        public string UserId { get; set; } // Id của người dùng cần chỉnh sửa quyền truy cập
+
+        public string Role { get; set; } // Quyền truy cập mới
+
+        // Các thuộc tính khác (nếu cần thiết)
+    }
+
 
     public class RegisterViewModel
     {

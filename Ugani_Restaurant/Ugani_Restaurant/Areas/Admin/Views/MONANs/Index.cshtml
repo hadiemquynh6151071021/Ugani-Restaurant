@@ -36,7 +36,7 @@
         <img src="~/Content/foodimages/@item.HINHANH" class="img-fluid" />
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.DONGIA) <small>@Html.DisplayFor(model => item.DVT)</small>
+        @item.DONGIA.Value.ToString("#,##0").Replace(',','.') <small>@Html.DisplayFor(model => item.DVT)</small>
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.LOAIMON.TENLOAIMON)

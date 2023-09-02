@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,7 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AccountAdminController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -52,12 +53,11 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             }
         }
 
-        [AllowAnonymous]
-        public ActionResult Create()
+        public ActionResult Index()
         {
-            ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Name", "Name");
-            return View();
+            return View(db.AspNetUsers.ToList());
         }
+
 
         //
         // GET: /Account/Login
@@ -99,6 +99,12 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult Create()
+        {
+            ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Name", "Name");
+            return View();
+        }
 
         //
         // POST: /Account/Register
@@ -132,10 +138,58 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
                 }
                 AddErrors(result);
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Id", "Name");
+            ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Name", "Name");
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditRole(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new EditRoleViewModel
+            {
+                UserId = id,
+                Role = UserManager.GetRoles(id).FirstOrDefault()
+            };
+            string idRole = db.AspNetRoles.Where(m => m.Name == model.Role).FirstOrDefault().Name;
+            ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Name", "Name", idRole);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRole(EditRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(model.UserId);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                    // Handle the case where the user is not found
+                }
+
+                // Remove the user from all existing roles
+                var currentRoles = UserManager.GetRoles(user.Id).FirstOrDefault();
+                UserManager.RemoveFromRoles(user.Id, currentRoles);
+
+                // Add the user to the new role
+                UserManager.AddToRole(user.Id, model.Role);
+                ViewBag.Role = new SelectList(db.AspNetRoles.ToList(), "Name", "Name");
+                return RedirectToAction("Index", "SystemManagement");
+            }
+
+            return View(model);
+        }
+
 
 
         private void AddErrors(IdentityResult result)
