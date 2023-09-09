@@ -78,6 +78,24 @@
             @if (isAdmin)
             {
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/AspNetRoles/Index">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Danh sách quyền</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/admin/AccountAdmin/Create">
+                        <span class="material-symbols-outlined">
+                            fiber_manual_record
+                        </span>
+                        <span>Tạo tài khoản</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <span class="material-symbols-outlined">
@@ -87,14 +105,6 @@
                     </a>
                     @Html.Action("RenderLOAIKHONGGIAN", "SystemManagement")
                     @*thêm code*@
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="/admin/loaimons">
-                        <span class="material-symbols-outlined">
-                            fiber_manual_record
-                        </span>
-                        <span>Loại món</span>
-                    </a>
                 </li>
 
                 <li class="nav-item">

@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TENIMG, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TENIMG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.TENIMG, null, new { type = "file", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TENIMG, "", new { @class = "text-danger" })
             </div>
         </div>

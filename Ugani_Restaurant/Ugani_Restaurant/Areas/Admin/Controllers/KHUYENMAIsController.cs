@@ -11,7 +11,7 @@ using Ugani_Restaurant.Models;
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
 
-    [Authorize(Roles = "Admin,Employment")]
+    //[Authorize(Roles = "Admin,Employment")]
     public class KHUYENMAIsController : Controller
     {
         private UGANI_1Entities db = new UGANI_1Entities();
@@ -22,20 +22,6 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(db.KHUYENMAIs.ToList());
         }
 
-        // GET: Admin/KHUYENMAIs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);
-            if (kHUYENMAI == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kHUYENMAI);
-        }
 
         // GET: Admin/KHUYENMAIs/Create
         public ActionResult Create()

@@ -21,20 +21,6 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(db.LOAIMONs.ToList());
         }
 
-        // GET: Admin/LOAIMONs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LOAIMON lOAIMON = db.LOAIMONs.Find(id);
-            if (lOAIMON == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lOAIMON);
-        }
 
         // GET: Admin/LOAIMONs/Create
         public ActionResult Create()

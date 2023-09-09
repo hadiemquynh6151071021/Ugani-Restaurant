@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IMG, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.IMG, new { type = "file", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DONGIA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DONGIA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DONGIA, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DONGIA, "", new { @class = "text-danger" })
             </div>
         </div>

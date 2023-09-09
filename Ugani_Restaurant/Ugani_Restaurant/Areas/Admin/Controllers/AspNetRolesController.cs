@@ -10,7 +10,7 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AspNetRolesController : Controller
     {
 
@@ -20,21 +20,6 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View(db.AspNetRoles.ToList());
-        }
-
-        // GET: Admin/AspNetRoles/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
         }
 
         // GET: Admin/AspNetRoles/Create
@@ -60,62 +45,95 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(aspNetRole);
         }
 
-        // GET: Admin/AspNetRoles/Edit/5
+        [HttpPost]
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            AspNetRole role = db.AspNetRoles.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Edit", role);
         }
 
-        // POST: Admin/AspNetRoles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(aspNetRole).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(aspNetRole);
-        }
-
-        // GET: Admin/AspNetRoles/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            AspNetRole role = db.AspNetRoles.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Delete", role);
         }
 
-        // POST: Admin/AspNetRoles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteSubmit(string CatId)
         {
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+            AspNetRole aspNetRole = db.AspNetRoles.Find(CatId);
             db.AspNetRoles.Remove(aspNetRole);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // GET: Admin/AspNetRoles/Edit/5
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+        //    if (aspNetRole == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(aspNetRole);
+        //}
+
+        // POST: Admin/AspNetRoles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(aspNetRole).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(aspNetRole);
+        //}
+
+        //public ActionResult DeleteModal(string CatId)
+        //{
+        //    AspNetRole roles = db.AspNetRoles.Where(m => m.Id == CatId).FirstOrDefault();
+        //    return PartialView("ModalDelete", roles);
+        //}
+
+        // GET: Admin/AspNetRoles/Delete/5
+        //public ActionResult Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+        //    if (aspNetRole == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(aspNetRole);
+        //}
+
+        //// POST: Admin/AspNetRoles/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(string id)
+        //{
+        //    AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+        //    db.AspNetRoles.Remove(aspNetRole);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

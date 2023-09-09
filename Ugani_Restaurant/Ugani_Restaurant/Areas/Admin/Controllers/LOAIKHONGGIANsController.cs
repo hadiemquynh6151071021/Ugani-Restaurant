@@ -21,20 +21,6 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(db.LOAIKHONGGIANs.ToList());
         }
 
-        // GET: Admin/LOAIKHONGGIANs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);
-            if (lOAIKHONGGIAN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lOAIKHONGGIAN);
-        }
 
         // GET: Admin/LOAIKHONGGIANs/Create
         public ActionResult Create()

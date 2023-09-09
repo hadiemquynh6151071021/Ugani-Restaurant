@@ -22,21 +22,7 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return PartialView("Index", bANANs);
         }
 
-        // GET: Admin/BANANs/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BANAN bANAN = db.BANANs.Find(id);
-            if (bANAN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bANAN);
-        }
-
+        
         // GET: Admin/BANANs/Create
         public ActionResult Create()
         {
@@ -95,31 +81,47 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(bANAN);
         }
 
-        // GET: Admin/BANANs/Delete/5
+        [HttpPost]
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             BANAN bANAN = db.BANANs.Find(id);
-            if (bANAN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bANAN);
+
+            return PartialView("Delete", bANAN);
         }
 
-        // POST: Admin/BANANs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteSubmit(string CatId)
         {
-            BANAN bANAN = db.BANANs.Find(id);
+            BANAN bANAN = db.BANANs.Find(CatId);
             db.BANANs.Remove(bANAN);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Admin/BANANs/Delete/5
+        //public ActionResult Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    BANAN bANAN = db.BANANs.Find(id);
+        //    if (bANAN == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(bANAN);
+        //}
+
+        // POST: Admin/BANANs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(string id)
+        //{
+        //    BANAN bANAN = db.BANANs.Find(id);
+        //    db.BANANs.Remove(bANAN);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

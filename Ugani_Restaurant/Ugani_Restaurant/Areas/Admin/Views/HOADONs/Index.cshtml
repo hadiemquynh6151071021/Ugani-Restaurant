@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.MAHD }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MAHD })
+                @Html.ActionLink("Details", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MAHD }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
