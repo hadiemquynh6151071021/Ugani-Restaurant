@@ -10,7 +10,7 @@ using Ugani_Restaurant.Models;
 
 namespace Ugani_Restaurant.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class LOAIKHONGGIANsController : Controller
     {
         private UGANI_1Entities db = new UGANI_1Entities();
@@ -76,31 +76,49 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(lOAIKHONGGIAN);
         }
 
-        // GET: Admin/LOAIKHONGGIANs/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);
-            if (lOAIKHONGGIAN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lOAIKHONGGIAN);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Delete", lOAIKHONGGIAN);
         }
 
-        // POST: Admin/LOAIKHONGGIANs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteSubmit(int CatId)
         {
-            LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);
+            LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(CatId);
             db.LOAIKHONGGIANs.Remove(lOAIKHONGGIAN);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");   
         }
+
+
+        // GET: Admin/LOAIKHONGGIANs/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);
+        //    if (lOAIKHONGGIAN == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(lOAIKHONGGIAN);
+        //}
+
+        // POST: Admin/LOAIKHONGGIANs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);
+        //    db.LOAIKHONGGIANs.Remove(lOAIKHONGGIAN);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

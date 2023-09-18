@@ -94,31 +94,49 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(mONAN);
         }
 
-        // GET: Admin/MONANs/Delete/5
-        public ActionResult Delete(int? id)
+
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MONAN mONAN = db.MONANs.Find(id);
-            if (mONAN == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mONAN);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            MONAN mONAN = db.MONANs.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Delete", mONAN);
         }
 
-        // POST: Admin/MONANs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteSubmit(int CatId)
         {
-            MONAN mONAN = db.MONANs.Find(id);
+            MONAN mONAN = db.MONANs.Find(CatId);
             db.MONANs.Remove(mONAN);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Admin/MONANs/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    MONAN mONAN = db.MONANs.Find(id);
+        //    if (mONAN == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(mONAN);
+        //}
+
+        // POST: Admin/MONANs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    MONAN mONAN = db.MONANs.Find(id);
+        //    db.MONANs.Remove(mONAN);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

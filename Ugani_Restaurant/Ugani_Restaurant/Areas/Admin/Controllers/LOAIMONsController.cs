@@ -76,31 +76,49 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(lOAIMON);
         }
 
-        // GET: Admin/LOAIMONs/Delete/5
-        public ActionResult Delete(int? id)
+
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LOAIMON lOAIMON = db.LOAIMONs.Find(id);
-            if (lOAIMON == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lOAIMON);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            LOAIMON lOAIMON = db.LOAIMONs.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Delete", lOAIMON);
         }
 
-        // POST: Admin/LOAIMONs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteSubmit(int CatId)
         {
-            LOAIMON lOAIMON = db.LOAIMONs.Find(id);
+            LOAIMON lOAIMON = db.LOAIMONs.Find(CatId); ;
             db.LOAIMONs.Remove(lOAIMON);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Admin/LOAIMONs/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LOAIMON lOAIMON = db.LOAIMONs.Find(id);
+        //    if (lOAIMON == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(lOAIMON);
+        //}
+
+        // POST: Admin/LOAIMONs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    LOAIMON lOAIMON = db.LOAIMONs.Find(id);
+        //    db.LOAIMONs.Remove(lOAIMON);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

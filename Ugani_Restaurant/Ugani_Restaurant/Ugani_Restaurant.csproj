@@ -394,16 +394,13 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Index.cshtml" />
     <Content Include="Content\fonts\Gistesy.ttf" />
     <Content Include="Areas\Admin\Views\LOAIMONs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\LOAIMONs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIMONs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIMONs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\MONANs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SystemManagement\LOAIMONAN_ls.cshtml" />
@@ -412,7 +409,6 @@
     <Content Include="Areas\Admin\Views\BANANs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\KHUYENMAIs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\KHUYENMAIs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\KHUYENMAIs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KHUYENMAIs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HOADONs\Create.cshtml" />
@@ -431,6 +427,9 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\LOAIMONs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MONANs\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chart\chart-area-demo.js" />
     <Content Include="Scripts\chart\chart-pie-demo.js" />

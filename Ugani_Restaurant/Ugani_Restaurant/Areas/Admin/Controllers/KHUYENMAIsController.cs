@@ -77,31 +77,49 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(kHUYENMAI);
         }
 
-        // GET: Admin/KHUYENMAIs/Delete/5
-        public ActionResult Delete(int? id)
+
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);
-            if (kHUYENMAI == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kHUYENMAI);
+            // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
+            KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);// Lấy thông tin về vai trò từ id
+
+            return PartialView("Delete", kHUYENMAI);
         }
 
-        // POST: Admin/KHUYENMAIs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteSubmit(int CatId)
         {
-            KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);
+            KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(CatId);
             db.KHUYENMAIs.Remove(kHUYENMAI);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Admin/KHUYENMAIs/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);
+        //    if (kHUYENMAI == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(kHUYENMAI);
+        //}
+
+        // POST: Admin/KHUYENMAIs/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    KHUYENMAI kHUYENMAI = db.KHUYENMAIs.Find(id);
+        //    db.KHUYENMAIs.Remove(kHUYENMAI);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
