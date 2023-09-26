@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Ugani_Restaurant.Models.LOAIKHONGGIAN>
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
+
+<div class="body-booking container d-flex flex-column gap-3">
+    <div class="list-btn border-1 d-flex flex-row justify-content-center gap-2 align-items-center">
+        @foreach (var item in Model)
+        {
+            <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
+            <p class="fs-6 fw-medium text-center">@item.TENLOAIKHONGGIAN</p>
+        }
+    </div>
+    <div id="listTable"></div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn-imgAreas").click(function () {
+            var id = $(this).data('id');
+            getTableById(id);
+        });
+
+        function getTableById(id) {
+            $.ajax({
+                url: "/Home/GetTableById",
+                type: "GET",
+                data: { id: id },
+                success: function (response) {
+                    // Cập nhật dữ liệu vào vùng hiển thị thông tin sinh viên
+                    $("#listTable").html(response);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
