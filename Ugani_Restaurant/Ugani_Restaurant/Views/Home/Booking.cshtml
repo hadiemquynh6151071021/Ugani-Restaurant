@@ -3,39 +3,90 @@
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .flatpickr-month, .flatpickr-weekdays, .flatpickr-monthDropdown-months, .flatpickr-weekday {
+        background-color: blue;
+    }
+</style>
+
+@*flatpickr*@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@*<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">*@
+
 <link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
 
 <div class="body-booking container d-flex flex-column gap-3">
-    <div class="list-btn border-1 d-flex flex-row justify-content-center gap-2 align-items-center">
+    <div class="list-btn w-100 d-flex flex-md-row  flex-column justify-content-center gap-2 align-items-center">
         @foreach (var item in Model)
         {
-            <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
-            <p class="fs-6 fw-medium text-center">@item.TENLOAIKHONGGIAN</p>
+            <div class="d-flex flex-column gap-2 w-100 h-100">
+                <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
+                <p class="fs-6 fw-medium text-center w-100">@item.TENLOAIKHONGGIAN</p>
+            </div>
         }
+    </div>
+    <div class="d-flex flex-md-row  flex-column gap-2">
+        <input type="text" id="datepicker" placeholder="Chọn ngày" />
+        <input type="text" id="startTime" placeholder="Giờ bắt đầu" />
+        <input type="text" id="endTime" placeholder="Giờ kết thúc" />
     </div>
     <div id="listTable"></div>
 </div>
 
+
+
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $(".btn-imgAreas").click(function () {
-            var id = $(this).data('id');
-            getTableById(id);
-        });
+        $(document).ready(function () {
+            $(".btn-imgAreas").click(function () {
+                var id = $(this).data('id');
+                var date = $("#datepicker").val();
+                var startTime = $("#startTime").val();
+                var endTime = $("#endTime").val();
 
-        function getTableById(id) {
+                alert(date + startTime + endTime);
+
+                getTableById(id, date, startTime, endTime);
+            });
+
+        function getTableById(id, date, startTime, endTime) {
             $.ajax({
                 url: "/Home/GetTableById",
                 type: "GET",
-                data: { id: id },
+                data: {
+                    id: id,
+                    date: date,
+                    startTime: startTime,
+                    endTime: endTime
+                },
                 success: function (response) {
-                    // Cập nhật dữ liệu vào vùng hiển thị thông tin sinh viên
+                    // Cập nhật dữ liệu vào vùng hiển thị thông tin bàn
                     $("#listTable").html(response);
                 }
             });
         }
     });
+
+
+    flatpickr("#datepicker", {
+        enableTime: false, // Không cho phép chọn giờ cho thẻ lịch
+        dateFormat: "Y-m-d", // Định dạng ngày (tuỳ chỉnh)
+    });
+
+    flatpickr("#startTime", {
+        enableTime: true, // Cho phép chọn giờ cho thẻ giờ bắt đầu
+        noCalendar: true, // Ẩn lịch
+        dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+    });
+
+    flatpickr("#endTime", {
+        enableTime: true, // Cho phép chọn giờ cho thẻ giờ kết thúc
+        noCalendar: true, // Ẩn lịch
+        dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+    });
+
 </script>
 
 

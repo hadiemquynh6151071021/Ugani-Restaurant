@@ -329,10 +329,11 @@
 
 .body-booking {
     .list-btn {
+        height:450px;
         .btn-imgAreas {
             background-size: cover;
-            width:550px;
-            height:400px;
+            width:100%;
+            height:100%;
             border: none; /* Loại bỏ đường viền */
             cursor: pointer; /* Biến con trỏ thành con trỏ bấm */
         }
