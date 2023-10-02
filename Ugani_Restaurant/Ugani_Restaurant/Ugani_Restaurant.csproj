@@ -180,6 +180,7 @@
     <Compile Include="Areas\Admin\Controllers\MONANsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SystemManagementController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CHITIETDATBANsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -308,6 +309,10 @@
     <Content Include="Content\foodimages\TraGung.png" />
     <Content Include="Content\foodimages\UcVitSotCam.jpg" />
     <Content Include="Content\foodimages\VemXanhSotTomyum.jpg" />
+    <Content Include="Content\imgfeedback\128852460_m.jpg" />
+    <Content Include="Content\imgfeedback\brooke-cagle-nZp9JF-OyiE-unsplash.jpg" />
+    <Content Include="Content\imgfeedback\ha-nguy-n-bLpMy2UDnOc-unsplash.jpg" />
+    <Content Include="Content\imgfeedback\jaunt-and-joy-ft2uNDDP0HU-unsplash.jpg" />
     <Content Include="Content\khonggian\Khonggiancapdoi.jpg" />
     <Content Include="Content\khonggian\Khonggiangiadinhlon.jpg" />
     <Content Include="Content\khonggian\Khonggiangiadinhnho.png" />
@@ -485,6 +490,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Booking.cshtml" />
     <Content Include="Views\Home\_listTable.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Create.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Delete.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Details.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Edit.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

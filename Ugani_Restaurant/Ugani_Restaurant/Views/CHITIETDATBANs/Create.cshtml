@@ -1,0 +1,158 @@
+﻿@model Ugani_Restaurant.Models.CHITIETDATBAN
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
+
+
+    @Html.AntiForgeryToken()
+    <div class="body-booking container d-flex flex-column gap-3 justify-content-center align-items-center">
+        <div class="d-flex flex-md-row mt-4 flex-column gap-3">
+            <div class="d-flex flex-row gap-3">
+                <label>Ngày đặt</label>
+                @Html.TextBoxFor(model => model.NGAYDAT, new { @id = "datepicker", type = "text" })
+            </div>
+            <div class="d-flex flex-row gap-3">
+                <label>Giờ đặt</label>
+                @Html.TextBoxFor(model => model.GIODATBAN, new { @id = "startTime", type = "text" })
+            </div>
+            <div class="d-flex flex-row gap-3">
+                <label>Giờ trả</label>
+                @Html.TextBoxFor(model => model.GIOTRABAN, new { @id = "endTime", type = "text" })
+            </div>
+        </div>
+        <div class="list-btn w-100 d-flex flex-md-row  flex-column justify-content-center gap-2 align-items-center">
+            @foreach (var item in ViewBag.LOAIKHONGGIAN)
+            {
+                <div class="d-flex flex-column gap-2 w-100 h-100">
+                    <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
+                    <p class="fs-6 fw-medium text-center w-100">@item.TENLOAIKHONGGIAN</p>
+                </div>
+            }
+        </div>
+        <div>
+            @Html.LabelFor(model => model.GHICHU, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GHICHU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GHICHU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="listTable" class="w-100">
+        </div>
+    </div>
+    @*<div class="form-horizontal">
+            <h4>CHITIETDATBAN</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.MAKH, "MAKH", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MAKH", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MAKH, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MABAN, "MABAN", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MABAN", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MABAN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NGAYDAT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NGAYDAT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NGAYDAT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GIODATBAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GIODATBAN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GIODATBAN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GIOTRABAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GIOTRABAN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GIOTRABAN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GHICHU, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GHICHU, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GHICHU, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-imgAreas").click(function () {
+                var id = $(this).data('id');
+                var date = $("#datepicker").val();
+                var startTime = $("#startTime").val();
+                var endTime = $("#endTime").val();
+
+                getTableById(id, date, startTime, endTime);
+            });
+
+            function getTableById(id, date, startTime, endTime) {
+                $.ajax({
+                    url: "/CHITIETDATBANs/GetTableById",
+                    type: "GET",
+                    data: {
+                        id: id,
+                        date: date,
+                        startTime: startTime,
+                        endTime: endTime
+                    },
+                    success: function (response) {
+                        // Cập nhật dữ liệu vào vùng hiển thị thông tin bàn
+                        $("#listTable").html(response);
+                    }
+                });
+            }
+        });
+
+
+        flatpickr("#datepicker", {
+            enableTime: false, // Không cho phép chọn giờ cho thẻ lịch
+            dateFormat: "Y-m-d", // Định dạng ngày (tuỳ chỉnh)
+        });
+
+        flatpickr("#startTime", {
+            enableTime: true, // Cho phép chọn giờ cho thẻ giờ bắt đầu
+            noCalendar: true, // Ẩn lịch
+            dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+        });
+
+        flatpickr("#endTime", {
+            enableTime: true, // Cho phép chọn giờ cho thẻ giờ kết thúc
+            noCalendar: true, // Ẩn lịch
+            dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+        });
+
+    </script>
+
+
+

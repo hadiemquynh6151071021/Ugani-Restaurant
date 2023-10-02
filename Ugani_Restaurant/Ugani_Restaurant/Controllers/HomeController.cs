@@ -39,8 +39,6 @@ namespace Ugani_Restaurant.Controllers
 
             //So ban co khong gian giong nhung chua duoc chon
             List<BANAN> bANANs = db.BANANs.Where(m => m.MAKHONGGIAN == id).ToList().Except(ctbANANs).ToList();
-
-
             List<BANAN> lsbANANs = new List<BANAN>();
             switch (b.Count())
             {
@@ -52,11 +50,11 @@ namespace Ugani_Restaurant.Controllers
                 default:
                     foreach (var x in b)
                     {
-                        if (startTime.TimeOfDay < x.GIODATBAN.Value.TimeOfDay && endTime.TimeOfDay < x.GIOTRABAN.Value.TimeOfDay)
+                        if (startTime.TimeOfDay < x.GIODATBAN.Value.TimeOfDay && endTime.TimeOfDay < x.GIODATBAN.Value.TimeOfDay)
                         {
                             lsbANANs.Add(db.BANANs.Find(x.MABAN));
                         }
-                        else if (startTime.TimeOfDay > x.GIODATBAN.Value.TimeOfDay && endTime.TimeOfDay > x.GIOTRABAN.Value.TimeOfDay)
+                        else if (startTime.TimeOfDay > x.GIODATBAN.Value.TimeOfDay && endTime.TimeOfDay > x.GIODATBAN.Value.TimeOfDay)
                         {
                             lsbANANs.Add(db.BANANs.Find(x.MABAN));
                         }
