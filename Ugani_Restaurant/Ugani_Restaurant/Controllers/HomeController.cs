@@ -64,6 +64,12 @@ namespace Ugani_Restaurant.Controllers
             return PartialView("_listTable", lsbANANs.Union(bANANs));
         }
 
+        [HttpPost]
+        public ActionResult SubmitBooking(int id,DateTime date, DateTime startTime,DateTime endTime,int idKG,string table,string note)
+        {
+            
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

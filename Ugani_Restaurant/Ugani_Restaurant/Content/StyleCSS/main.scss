@@ -327,6 +327,8 @@
     }
 }
 
+/*Booking*/
+
 .body-booking {
     .list-btn {
         height:450px;
@@ -340,6 +342,31 @@
         .btn-imgAreas:hover{
             background-color:gray;
             opacity: 0.8;
+        }
+    }
+}
+
+/*About*/
+.container-fluid {
+    .hisConst {
+        .hisBlock {
+            background-color: rgb(15,158,162);
+
+            .hisBlock-inline {
+                .hisBlock-inline-Cont {
+                    font-size: 20px;
+                    text-align: justify;
+                }
+            }
+        }
+    }
+
+    .feedback {
+        .feedback-inline {
+            margin: 0 20px;
+            .feedback-inline-content{
+                text-align:justify;
+            }
         }
     }
 }

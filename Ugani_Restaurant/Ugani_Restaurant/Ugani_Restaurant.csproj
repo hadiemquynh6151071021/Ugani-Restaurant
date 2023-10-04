@@ -313,6 +313,7 @@
     <Content Include="Content\imgfeedback\brooke-cagle-nZp9JF-OyiE-unsplash.jpg" />
     <Content Include="Content\imgfeedback\ha-nguy-n-bLpMy2UDnOc-unsplash.jpg" />
     <Content Include="Content\imgfeedback\jaunt-and-joy-ft2uNDDP0HU-unsplash.jpg" />
+    <Content Include="Content\imgfeedback\marco-xu-frpCC-A8mp0-unsplash.jpg" />
     <Content Include="Content\khonggian\Khonggiancapdoi.jpg" />
     <Content Include="Content\khonggian\Khonggiangiadinhlon.jpg" />
     <Content Include="Content\khonggian\Khonggiangiadinhnho.png" />
@@ -322,7 +323,9 @@
     <Content Include="Content\photoHome\A Guide to the Best Thai Restaurants in Denmark.jpg" />
     <Content Include="Content\photoHome\BLESS Restaurant Hamburg.jpg" />
     <Content Include="Content\photoHome\How to Price Food to Sell Online.png" />
+    <Content Include="Content\photoHome\Ramen.jpg" />
     <Content Include="Content\photoHome\Roasted Garlic Pasta with Tomatoes and Spinach.jpg" />
+    <Content Include="Content\photoHome\Shushi.png" />
     <Content Include="Content\photoHome\The 11 Montreal Restaurants You%27ll Only Be Able To Afford To Go To Once In Your Life.jpg" />
     <Content Include="Content\photoHome\Ugani.png" />
     <Content Include="Content\StyleCSS\layout.css">

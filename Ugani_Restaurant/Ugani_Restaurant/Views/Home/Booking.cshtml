@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<Ugani_Restaurant.Models.LOAIKHONGGIAN>
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<style>
-    .flatpickr-month, .flatpickr-weekdays, .flatpickr-monthDropdown-months, .flatpickr-weekday {
-        background-color: blue;
-    }
-</style>
+}
 
 @*flatpickr*@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -17,7 +13,7 @@
 
 <link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
 
-<div class="body-booking container d-flex flex-column gap-3 justify-content-center align-items-center">
+<div class="body-booking container d-flex flex-column gap-3 justify-content-center align-items-center" id=@User.Identity.GetUserId()>
     <div class="d-flex flex-md-row mt-4 flex-column gap-3">
         <div class="d-flex flex-row gap-3">
             <label>Ngày đặt</label>
@@ -36,7 +32,7 @@
         @foreach (var item in Model)
         {
             <div class="d-flex flex-column gap-2 w-100 h-100">
-                <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
+                <button data-idKG="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
                 <p class="fs-6 fw-medium text-center w-100">@item.TENLOAIKHONGGIAN</p>
             </div>
         }
@@ -55,20 +51,46 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>
-        $(document).ready(function () {
-            $(".btn-imgAreas").click(function () {
-                var id = $(this).data('id');
-                var date = $("#datepicker").val();
-                var startTime = $("#startTime").val();
-                var endTime = $("#endTime").val();
+    $(document).ready(function () {
+        var id;
+        var date;
+        var startTime;
+        var endTime;
+        var table;
+        var note;
+        var idKG;
 
-                getTableById(id, date, startTime, endTime);
-            });
+        $(".btn-imgAreas").click(function () {
+            id = $(this).data('id');
+            date = $("#datepicker").val();
+            startTime = $("#startTime").val();
+            endTime = $("#endTime").val();
 
-            $("#b1").click(function () {
-                var a = $("#haha").val();
-                alert(a);
+            getTableById(id, date, startTime, endTime);
+        });
+
+        $("#b1").click(function () {
+            idKG = $(this).data('idKG');
+            table = $("#tableDropdown").val();
+            note = $("#note").val();
+            $.ajax({
+                url: "/Home/SubmitBooking",
+                type: "POST",
+                data: {
+                    id: id,
+                    date: date,
+                    startTime: startTime,
+                    endTime: endTime,
+                    idKG: idKG,
+                    table: table,
+                    note: note
+                },
+                success: function (response) {
+                    // Cập nhật dữ liệu vào vùng hiển thị thông tin bàn
+                    alert("Bạn đã đặt bàn thành công!")
+                }
             });
+        });
 
         function getTableById(id, date, startTime, endTime) {
             $.ajax({
