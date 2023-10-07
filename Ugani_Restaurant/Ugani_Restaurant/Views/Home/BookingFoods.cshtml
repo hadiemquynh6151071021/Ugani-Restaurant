@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Ugani_Restaurant.Models.MONAN>
+@{
+    ViewBag.Title = "BookingFoods";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var m in ViewBag.LOAIMON)
+{
+    <label data-id=@m.MALOAIMON>@m.TENLOAIMON</label>
+}
+
+
+

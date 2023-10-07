@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
 
-<div class="body-booking container d-flex flex-column gap-3 justify-content-center align-items-center" id=@User.Identity.GetUserId()>
+<div class="body-booking container d-flex flex-column gap-3 justify-content-center align-items-center">
     <div class="d-flex flex-md-row mt-4 flex-column gap-3">
         <div class="d-flex flex-row gap-3">
             <label>Ngày đặt</label>
@@ -32,7 +32,7 @@
         @foreach (var item in Model)
         {
             <div class="d-flex flex-column gap-2 w-100 h-100">
-                <button data-idKG="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
+                <button data-id="@item.MALOAIKHONGGIAN" class="btn-imgAreas rounded-3" style="background-image: url(/Content/khonggian/@item.IMG)"></button>
                 <p class="fs-6 fw-medium text-center w-100">@item.TENLOAIKHONGGIAN</p>
             </div>
         }
@@ -58,41 +58,40 @@
         var endTime;
         var table;
         var note;
-        var idKG;
 
         $(".btn-imgAreas").click(function () {
             id = $(this).data('id');
             date = $("#datepicker").val();
             startTime = $("#startTime").val();
             endTime = $("#endTime").val();
+            alert(id);
 
             getTableById(id, date, startTime, endTime);
         });
 
         $("#b1").click(function () {
-            idKG = $(this).data('idKG');
             table = $("#tableDropdown").val();
             note = $("#note").val();
             $.ajax({
                 url: "/Home/SubmitBooking",
                 type: "POST",
                 data: {
-                    id: id,
                     date: date,
                     startTime: startTime,
                     endTime: endTime,
-                    idKG: idKG,
                     table: table,
                     note: note
                 },
                 success: function (response) {
-                    // Cập nhật dữ liệu vào vùng hiển thị thông tin bàn
-                    alert("Bạn đã đặt bàn thành công!")
+                    window.location.href = "/Home/BookingFoods";
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
                 }
             });
         });
 
-        function getTableById(id, date, startTime, endTime) {
+        function getTableById(idKG, date, startTime, endTime) {
             $.ajax({
                 url: "/Home/GetTableById",
                 type: "GET",

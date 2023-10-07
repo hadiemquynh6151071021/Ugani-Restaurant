@@ -498,6 +498,7 @@
     <Content Include="Views\CHITIETDATBANs\Details.cshtml" />
     <Content Include="Views\CHITIETDATBANs\Edit.cshtml" />
     <Content Include="Views\CHITIETDATBANs\Index.cshtml" />
+    <Content Include="Views\Home\BookingFoods.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

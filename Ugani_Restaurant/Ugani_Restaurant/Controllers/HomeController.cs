@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,12 @@ namespace Ugani_Restaurant.Controllers
         public ActionResult Booking()
         {
             return View(db.LOAIKHONGGIANs.ToList());
+        }
+
+        public ActionResult BookingFoods()
+        {
+            ViewBag.LOAIMON = db.LOAIMONs.ToList();
+            return View(db.MONANs.ToList());
         }
 
         public ActionResult GetTableById(int id, DateTime date, DateTime startTime, DateTime endTime)
@@ -65,9 +72,22 @@ namespace Ugani_Restaurant.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitBooking(int id,DateTime date, DateTime startTime,DateTime endTime,int idKG,string table,string note)
+        public ActionResult SubmitBooking(DateTime date, DateTime startTime, DateTime endTime, string table, string note)
         {
-            
+            if (ModelState.IsValid)
+            {
+                CHITIETDATBAN cHITIETDATBAN = new CHITIETDATBAN();
+                cHITIETDATBAN.MAKH = User.Identity.GetUserId();
+                cHITIETDATBAN.NGAYDAT = date.Date;
+                cHITIETDATBAN.GIODATBAN = startTime;
+                cHITIETDATBAN.GIOTRABAN = endTime;
+                cHITIETDATBAN.MABAN = table;
+                cHITIETDATBAN.GHICHU = note;
+                db.CHITIETDATBANs.Add(cHITIETDATBAN);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("About");
         }
 
         public ActionResult About()
