@@ -41,10 +41,7 @@
         <label>Ghi chú</label>
         @Html.TextBox("note", null, new { @id = "note", type = "text" })
     </div>
-    <div id="listTable" class="w-100">
-
-    </div>
-    <button id="b1">HAHA</button>
+    <button id="submitBooking">Đặt bàn</button>
 </div>
 
 
@@ -64,12 +61,11 @@
             date = $("#datepicker").val();
             startTime = $("#startTime").val();
             endTime = $("#endTime").val();
-            alert(id);
 
             getTableById(id, date, startTime, endTime);
         });
 
-        $("#b1").click(function () {
+        $("#submitBooking").click(function () {
             table = $("#tableDropdown").val();
             note = $("#note").val();
             $.ajax({

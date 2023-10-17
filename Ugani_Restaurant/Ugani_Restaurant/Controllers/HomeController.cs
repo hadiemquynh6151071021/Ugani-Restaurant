@@ -90,6 +90,21 @@ namespace Ugani_Restaurant.Controllers
             return RedirectToAction("About");
         }
 
+        [HttpPost]
+        public ActionResult SubmitBookingFoods(List<CHITIETDATBAN> selectedItems)
+        {
+            if (ModelState.IsValid)
+            {
+                CHITIETDATMONAN cHITIETDATMONAN = new CHITIETDATMONAN();
+                cHITIETDATMONAN.MAKH = User.Identity.GetUserId();
+                
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

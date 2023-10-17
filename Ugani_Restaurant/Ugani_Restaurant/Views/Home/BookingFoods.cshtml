@@ -1,13 +1,88 @@
 ﻿@model IEnumerable<Ugani_Restaurant.Models.MONAN>
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "BookingFoods";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@foreach (var m in ViewBag.LOAIMON)
-{
-    <label data-id=@m.MALOAIMON>@m.TENLOAIMON</label>
-}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
+<div class="list-fooditem" data-idKH=@User.Identity.GetUserId()>
+    @foreach (var item in Model)
+    {
+        <div class="wrapper">
+            <div class="food-item">
+                <div class="top" style="background-image: url('/Content/foodimages/@item.HINHANH'); background-repeat: no-repeat; background-position: center center;"></div>
+                <div class="bottom">
+                    <div class="left">
+                        <div class="details">
+                            <h5 class="itemName">@item.TENMONAN</h5>
+                            <p class="itemPrice">@item.DONGIA</p><span>@item.DVT</span>
+                        </div>
+                        <div class="buy" data-itemid=@item.MAMONAN><span class="material-symbols-outlined">shopping_cart</span></div>
+                    </div>
+                    <div class="right">
+                        <div class="done"><span class="material-symbols-outlined">check</span></div>
+                        <div class="details">
+                            <input class="numberstyle" type="number" min="1" max="10" step="1" value="1">
+                        </div>
+                        <div class="remove"><span class="material-symbols-outlined">close</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).on('click', '.buy', function () {
+        $(this).closest('.bottom').addClass("clicked");
+    });
+
+    $(document).on('click', '.remove', function () {
+        $(this).closest('.bottom').removeClass("clicked");
+    });
+
+    var selectedItems = []; // Mảng lưu trữ thông tin chi tiết món ăn đã chọn
+
+    $('.buy').click(function () {
+        var idKH = $(this).data("idKH");
+        var itemID = $(this).data("itemid"); // Lấy ID món ăn từ dữ liệu HTML hoặc thuộc tính khác
+        var itemName = $(this).siblings('.details').find('.itemName').text(); // Lấy tên món ăn
+        var itemPrice = parseFloat($(this).siblings('.details').find('.itemPrice').text()); // Lấy giá món ăn
+        var itemNumber = parseInt($(this).siblings('.details').find('.numberstyle').val());
+        var date = new Date();
+
+        // Tạo đối tượng chi tiết món ăn và thêm vào mảng selectedItems
+        var itemDetail = {
+            makh: idKH,
+            id: itemID,
+            sl: 1,
+            date: date.toUTCString()
+        };
+        selectedItems.push(itemDetail);
+    });
+
+    $('#submit-button').click(function () {
+        $.ajax({
+            url: '/Home/SubmitBookingFoods', // Điền đúng đường dẫn của action trong controller của bạn
+            method: 'POST',
+            data: { selectedItems: selectedItems }, // Gửi dãy selectedItems lên máy chủ
+            success: function (response) {
+                // Xử lý kết quả trả về từ máy chủ (nếu cần)
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+
+
+</script>
+
+
+
 
 
 

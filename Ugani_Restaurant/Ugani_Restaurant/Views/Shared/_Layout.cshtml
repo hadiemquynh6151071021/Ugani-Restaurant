@@ -4,14 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css
-      ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/StyleCSS/layout.css" />
-    <script src="~/Scripts/bootstrap.bundle.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
@@ -26,7 +22,7 @@
                         @Html.ActionLink("TRANG CHỦ", "Index", "Home", new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("VỀ CHÚNG TÔI", "#", "#", new { @class = "nav-link" })
+                        @Html.ActionLink("VỀ CHÚNG TÔI", "About", "#", new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("ĐẶT BÀN", "Booking", "Home", new { @class = "nav-link" })
@@ -80,4 +76,6 @@
     @RenderSection("scripts", required: false)
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+<script src="~/Scripts/bootstrap.bundle.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 </html>
