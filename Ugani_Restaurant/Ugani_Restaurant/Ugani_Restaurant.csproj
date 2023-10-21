@@ -339,6 +339,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>main.scss</DependentUpon>
     </Content>
+    <Content Include="Content\StyleCSS\numberic.css" />
     <Content Include="Content\StyleCSS\sb-admin-2.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

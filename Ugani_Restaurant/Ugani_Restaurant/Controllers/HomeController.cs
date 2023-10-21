@@ -96,7 +96,7 @@ namespace Ugani_Restaurant.Controllers
             if (ModelState.IsValid)
             {
                 CHITIETDATMONAN cHITIETDATMONAN = new CHITIETDATMONAN();
-                cHITIETDATMONAN.MAKH = User.Identity.GetUserId();
+                //cHITIETDATMONAN.MAKH = User.Identity.GetUserId();
                 
                 db.SaveChanges();
                 return RedirectToAction("Index");

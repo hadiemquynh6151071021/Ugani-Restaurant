@@ -474,7 +474,7 @@
             height: 100%;
 
             .top {
-                height: 80%;
+                height: 75%;
                 width: 100%;
                 background: url(https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg) no-repeat center center;
                 -webkit-background-size: 100%;
@@ -485,7 +485,7 @@
 
             .bottom {
                 width: 200%;
-                height: 20%;
+                height: 25%;
                 transition: transform 0.5s;
 
                 &.clicked {
@@ -510,9 +510,9 @@
                     float: left;
 
                     .details {
-                        padding: 20px;
+                        padding: 10px;
                         float: left;
-                        width: calc(70% - 40px);
+                        width: calc(70%);
                     }
 
                     .buy {
@@ -558,7 +558,7 @@
                         align-items: center;
                         padding: 10px;
                         float: right;
-                        width: calc(70% - 2px);
+                        width: calc(70%);
                         height: 50%;
                     }
 
@@ -680,4 +680,93 @@
             }
         }
     }
+}
+
+// year picker styling
+
+input[type=number],
+select {
+    border: solid 1px #757575;
+    font: inherit;
+    padding: .25em;
+
+    &:invalid {
+        background-color: #fee;
+        border-color: #c00;
+        color: #c00;
+    }
+}
+
+.range-container {
+    margin-bottom: 1em;
+    position: relative;
+    width: 200px;
+
+    input[type=range] {
+        position: relative;
+        width: 80%;
+    }
+
+    output {
+        margin-left: 5px;
+        font-family: sans-serif;
+        position: absolute;
+    }
+}
+
+.digits-container {
+    white-space: nowrap;
+
+    input[type=number] {
+        text-align: center;
+        width: 1.5em;
+    }
+
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+// general pen styling
+
+html {
+    background-color: #def;
+    font-family: sans-serif;
+    height: 100vh;
+}
+
+h2 {
+    color: #abc;
+    font-size: 2em;
+    margin: .25em .25em 0 .25em;
+    text-align: center;
+}
+
+h3 {
+    border-bottom: solid 1px #ccc;
+    margin: 0;
+    padding-bottom: .25em;
+}
+
+.year-pickers {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+}
+
+section {
+    background-color: #fff;
+    border: solid 2px #abc;
+    flex: 1 1 200px;
+    margin: .5em;
+    padding: 1em;
+}
+
+aside {
+    bottom: 1em;
+    font-size: .75em;
+    position: absolute;
+    right: 1em;
 }
