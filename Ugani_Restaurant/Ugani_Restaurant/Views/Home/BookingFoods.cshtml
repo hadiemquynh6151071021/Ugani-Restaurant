@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Ugani_Restaurant.Models.MONAN>
+@using System.Collections.Generic;
+@using Ugani_Restaurant.Models
+
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "BookingFoods";
@@ -7,9 +10,9 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="~/Content/StyleCSS/main.css" />
-<link rel="stylesheet" href="~/Content/StyleCSS/numberic.css"/>
+<link rel="stylesheet" href="~/Content/StyleCSS/numberic.css" />
 <div class="container">
-    <div class="list-fooditem" >
+    <div class="list-fooditem">
         @foreach (var item in Model)
         {
             <div class="wrapper">
@@ -59,34 +62,35 @@
         $(this).closest('.bottom').removeClass("clicked");
     });
 
-    var selectedItems = []; // Mảng lưu trữ thông tin chi tiết món ăn đã chọn
+    var selectedItems = [];
 
-    $('.buy').click(function () {
-        var idKH = $(this).data("idkh"); //lấy id Khách hàng 
-        var itemID = $(this).data("itemid"); // Lấy ID món ăn từ dữ liệu HTML hoặc thuộc tính khác
+    $(document).on('click', '.buy', function () {
+        var idKH = $(this).data("idkh"); // Lấy id Khách hàng
+        var itemID = parseInt($(this).data("itemid")); // Lấy ID món ăn từ dữ liệu HTML hoặc thuộc tính khác
         var itemName = $(this).siblings('.details').find('.itemName').text(); // Lấy tên món ăn
         var itemPrice = parseFloat($(this).siblings('.details').find('.itemPrice').text()); // Lấy giá món ăn
-        var itemNumber = parseInt($(this).siblings('.details').find('.quantity').val()); //Lấy số lượng món muốn đặt
+        var itemNumber = parseInt($(this).siblings('.details').find('.quantity').val()); // Lấy số lượng món muốn đặt
         var date = new Date();
-        alert(idKH + itemID + itemName + itemPrice + itemNumber + date);
 
-        // Tạo đối tượng chi tiết món ăn và thêm vào mảng selectedItems
         var itemDetail = {
             makh: idKH,
-            id: itemID,
-            number: itemNumber,
-            date: date.toUTCString()
+            mamonan: itemID,
+            tenmonan: itemName,
+            dongia: itemPrice,
+            soluong: itemNumber,
+            ngaydat: date.toUTCString()
         };
         selectedItems.push(itemDetail);
     });
 
     $('#submit-button').click(function () {
         $.ajax({
-            url: '/Home/SubmitBookingFoods', // Điền đúng đường dẫn của action trong controller của bạn
+            url: '/Home/SubmitBookingFoods', // Thay thế 'ControllerName' bằng tên của controller của bạn
             method: 'POST',
             data: { selectedItems: selectedItems }, // Gửi dãy selectedItems lên máy chủ
             success: function (response) {
                 // Xử lý kết quả trả về từ máy chủ (nếu cần)
+                window.location.href = "/HOADON/";
             },
             error: function (error) {
                 console.log(error);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ugani_Restaurant.Models;
@@ -90,19 +91,34 @@ namespace Ugani_Restaurant.Controllers
             return RedirectToAction("About");
         }
 
+        [HttpGet]
+        public ActionResult ShowBill(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HOADON hOADON = db.HOADONs.Find(id);
+            if (hOADON == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hOADON);
+        }
+
         [HttpPost]
-        public ActionResult SubmitBookingFoods(List<CHITIETDATBAN> selectedItems)
+        public ActionResult SubmitBookingFoods(List<CHITIETDATMONAN> selectedItems)
         {
             if (ModelState.IsValid)
             {
-                CHITIETDATMONAN cHITIETDATMONAN = new CHITIETDATMONAN();
-                //cHITIETDATMONAN.MAKH = User.Identity.GetUserId();
-                
+                // Làm các thao tác xử lý dữ liệu ở đây, ví dụ: lưu danh sách CHITIETDATMONAN vào CSDL
+                db.CHITIETDATMONANs.AddRange(selectedItems);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
+
 
 
         public ActionResult About()
