@@ -40,9 +40,9 @@
     <div id="listTable"></div>
     <div class="d-flex flex-column gap-1 w-100">
         <label>Ghi chú</label>
-        @Html.TextBox("note", null, new { @id = "note", type = "text" })
+        @Html.TextArea("note", null, new { @id = "note", type = "text" })
     </div>
-    <button id="submitBooking">Đặt bàn</button>
+    <button class="btn btn-primary" id="submitBooking">Đặt bàn</button>
 </div>
 
 
@@ -92,7 +92,7 @@
                 url: "/Home/GetTableById",
                 type: "GET",
                 data: {
-                    id: id,
+                    id: idKG,
                     date: date,
                     startTime: startTime,
                     endTime: endTime

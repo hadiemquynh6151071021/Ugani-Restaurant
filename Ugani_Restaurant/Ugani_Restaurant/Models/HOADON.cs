@@ -14,11 +14,23 @@ namespace Ugani_Restaurant.Models
     
     public partial class HOADON
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HOADON()
+        {
+            this.CHITIETDATBANs = new HashSet<CHITIETDATBAN>();
+            this.CHITIETDATMONANs = new HashSet<CHITIETDATMONAN>();
+        }
+    
         public int MAHD { get; set; }
         public string MAKH { get; set; }
         public Nullable<decimal> TONGTIEN { get; set; }
         public string TINHTRANG { get; set; }
+        public Nullable<System.DateTime> NGAYLAPHD { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETDATBAN> CHITIETDATBANs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETDATMONAN> CHITIETDATMONANs { get; set; }
     }
 }

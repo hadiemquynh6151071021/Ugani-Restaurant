@@ -74,7 +74,7 @@
       <PropertyRef Name="STT" />
     </Key>
     <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MAHD" Type="int" Nullable="false" />
     <Property Name="MABAN" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="NGAYDAT" Type="date" />
     <Property Name="GIODATBAN" Type="datetime" />
@@ -86,7 +86,7 @@
       <PropertyRef Name="STT" />
     </Key>
     <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MAHD" Type="int" Nullable="false" />
     <Property Name="MAMONAN" Type="int" Nullable="false" />
     <Property Name="SOLUONG" Type="int" />
     <Property Name="NGAYDAT" Type="date" />
@@ -99,16 +99,7 @@
     <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="TONGTIEN" Type="decimal" Precision="18" Scale="0" />
     <Property Name="TINHTRANG" Type="nvarchar" MaxLength="128" />
-  </EntityType>
-  <EntityType Name="KHUYENMAI">
-    <Key>
-      <PropertyRef Name="MAKM" />
-    </Key>
-    <Property Name="MAKM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TENIMG" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="TILE" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="NGAYBATDAU" Type="datetime" />
-    <Property Name="NGAYKETTHUC" Type="datetime" />
+    <Property Name="NGAYLAPHD" Type="datetime" />
   </EntityType>
   <EntityType Name="LOAIKHONGGIAN">
     <Key>
@@ -149,6 +140,18 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_CHITIETDATBAN_HOADON">
+    <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+    <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOADON">
+        <PropertyRef Name="MAHD" />
+      </Principal>
+      <Dependent Role="CHITIETDATBAN">
+        <PropertyRef Name="MAHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -206,14 +209,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="RBTV_PF_1_DANHSACHMONAN">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
     <End Role="CHITIETDATMONAN" Type="Self.CHITIETDATMONAN" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
+      <Principal Role="HOADON">
+        <PropertyRef Name="MAHD" />
       </Principal>
       <Dependent Role="CHITIETDATMONAN">
-        <PropertyRef Name="MAKH" />
+        <PropertyRef Name="MAHD" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -226,18 +229,6 @@
       </Principal>
       <Dependent Role="BANAN">
         <PropertyRef Name="MAKHONGGIAN" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RBTV_PF1_DANHSACHBAN">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-    <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CHITIETDATBAN">
-        <PropertyRef Name="MAKH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -300,11 +291,14 @@
     <EntitySet Name="CHITIETDATBAN" EntityType="Self.CHITIETDATBAN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CHITIETDATMONAN" EntityType="Self.CHITIETDATMONAN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KHUYENMAI" EntityType="Self.KHUYENMAI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOAIKHONGGIAN" EntityType="Self.LOAIKHONGGIAN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOAIMON" EntityType="Self.LOAIMON" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MONAN" EntityType="Self.MONAN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CHITIETDATBAN_HOADON" Association="Self.FK_CHITIETDATBAN_HOADON">
+      <End Role="HOADON" EntitySet="HOADON" />
+      <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -322,16 +316,12 @@
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
     <AssociationSet Name="RBTV_PF_1_DANHSACHMONAN" Association="Self.RBTV_PF_1_DANHSACHMONAN">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="HOADON" EntitySet="HOADON" />
       <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONAN" />
     </AssociationSet>
     <AssociationSet Name="RBTV_PF_BANAN" Association="Self.RBTV_PF_BANAN">
       <End Role="LOAIKHONGGIAN" EntitySet="LOAIKHONGGIAN" />
       <End Role="BANAN" EntitySet="BANAN" />
-    </AssociationSet>
-    <AssociationSet Name="RBTV_PF1_DANHSACHBAN" Association="Self.RBTV_PF1_DANHSACHBAN">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
     </AssociationSet>
     <AssociationSet Name="RBTV_PF1_HOADON" Association="Self.RBTV_PF1_HOADON">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

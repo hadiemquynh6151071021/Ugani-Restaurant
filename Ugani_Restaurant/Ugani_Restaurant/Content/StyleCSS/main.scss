@@ -770,3 +770,19 @@ aside {
     position: absolute;
     right: 1em;
 }
+
+/*Booking*/
+.body-booking {
+    .d-flex {
+        .d-flex {
+            #datepicker, #startTime, #endTime, #note {
+                border-radius: 5px;
+            }
+        }
+    }
+
+    #submitBooking {
+        border-radius: 5px;
+    }
+}
+

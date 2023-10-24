@@ -30,14 +30,13 @@ namespace Ugani_Restaurant.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<BANAN> BANANs { get; set; }
         public virtual DbSet<CHITIETDATBAN> CHITIETDATBANs { get; set; }
         public virtual DbSet<CHITIETDATMONAN> CHITIETDATMONANs { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
-        public virtual DbSet<KHUYENMAI> KHUYENMAIs { get; set; }
         public virtual DbSet<LOAIKHONGGIAN> LOAIKHONGGIANs { get; set; }
         public virtual DbSet<LOAIMON> LOAIMONs { get; set; }
         public virtual DbSet<MONAN> MONANs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

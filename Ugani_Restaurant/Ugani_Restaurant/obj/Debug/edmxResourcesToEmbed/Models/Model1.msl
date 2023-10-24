@@ -57,91 +57,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BANANs">
-      <EntityTypeMapping TypeName="UGANI_1Model.BANAN">
-        <MappingFragment StoreEntitySet="BANAN">
-          <ScalarProperty Name="MABAN" ColumnName="MABAN" />
-          <ScalarProperty Name="MAKHONGGIAN" ColumnName="MAKHONGGIAN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CHITIETDATBANs">
-      <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATBAN">
-        <MappingFragment StoreEntitySet="CHITIETDATBAN">
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-          <ScalarProperty Name="MABAN" ColumnName="MABAN" />
-          <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
-          <ScalarProperty Name="GIODATBAN" ColumnName="GIODATBAN" />
-          <ScalarProperty Name="GIOTRABAN" ColumnName="GIOTRABAN" />
-          <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CHITIETDATMONANs">
-      <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATMONAN">
-        <MappingFragment StoreEntitySet="CHITIETDATMONAN">
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-          <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
-          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-          <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HOADONs">
-      <EntityTypeMapping TypeName="UGANI_1Model.HOADON">
-        <MappingFragment StoreEntitySet="HOADON">
-          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-          <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
-          <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KHUYENMAIs">
-      <EntityTypeMapping TypeName="UGANI_1Model.KHUYENMAI">
-        <MappingFragment StoreEntitySet="KHUYENMAI">
-          <ScalarProperty Name="MAKM" ColumnName="MAKM" />
-          <ScalarProperty Name="TENIMG" ColumnName="TENIMG" />
-          <ScalarProperty Name="TILE" ColumnName="TILE" />
-          <ScalarProperty Name="NGAYBATDAU" ColumnName="NGAYBATDAU" />
-          <ScalarProperty Name="NGAYKETTHUC" ColumnName="NGAYKETTHUC" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LOAIKHONGGIANs">
-      <EntityTypeMapping TypeName="UGANI_1Model.LOAIKHONGGIAN">
-        <MappingFragment StoreEntitySet="LOAIKHONGGIAN">
-          <ScalarProperty Name="MALOAIKHONGGIAN" ColumnName="MALOAIKHONGGIAN" />
-          <ScalarProperty Name="TENLOAIKHONGGIAN" ColumnName="TENLOAIKHONGGIAN" />
-          <ScalarProperty Name="IMG" ColumnName="IMG" />
-          <ScalarProperty Name="MOTA" ColumnName="MOTA" />
-          <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
-          <ScalarProperty Name="DVT" ColumnName="DVT" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LOAIMONs">
-      <EntityTypeMapping TypeName="UGANI_1Model.LOAIMON">
-        <MappingFragment StoreEntitySet="LOAIMON">
-          <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
-          <ScalarProperty Name="TENLOAIMON" ColumnName="TENLOAIMON" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MONANs">
-      <EntityTypeMapping TypeName="UGANI_1Model.MONAN">
-        <MappingFragment StoreEntitySet="MONAN">
-          <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
-          <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
-          <ScalarProperty Name="TENMONAN" ColumnName="TENMONAN" />
-          <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
-          <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
-          <ScalarProperty Name="DVT" ColumnName="DVT" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="UGANI_1Model.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -161,5 +76,80 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="BANANs">
+      <EntityTypeMapping TypeName="UGANI_1Model.BANAN">
+        <MappingFragment StoreEntitySet="BANAN">
+          <ScalarProperty Name="MAKHONGGIAN" ColumnName="MAKHONGGIAN" />
+          <ScalarProperty Name="MABAN" ColumnName="MABAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHITIETDATBANs">
+      <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATBAN">
+        <MappingFragment StoreEntitySet="CHITIETDATBAN">
+          <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+          <ScalarProperty Name="GIOTRABAN" ColumnName="GIOTRABAN" />
+          <ScalarProperty Name="GIODATBAN" ColumnName="GIODATBAN" />
+          <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
+          <ScalarProperty Name="MABAN" ColumnName="MABAN" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHITIETDATMONANs">
+      <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATMONAN">
+        <MappingFragment StoreEntitySet="CHITIETDATMONAN">
+          <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
+          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+          <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOADONs">
+      <EntityTypeMapping TypeName="UGANI_1Model.HOADON">
+        <MappingFragment StoreEntitySet="HOADON">
+          <ScalarProperty Name="NGAYLAPHD" ColumnName="NGAYLAPHD" />
+          <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
+          <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOAIKHONGGIANs">
+      <EntityTypeMapping TypeName="UGANI_1Model.LOAIKHONGGIAN">
+        <MappingFragment StoreEntitySet="LOAIKHONGGIAN">
+          <ScalarProperty Name="DVT" ColumnName="DVT" />
+          <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+          <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+          <ScalarProperty Name="IMG" ColumnName="IMG" />
+          <ScalarProperty Name="TENLOAIKHONGGIAN" ColumnName="TENLOAIKHONGGIAN" />
+          <ScalarProperty Name="MALOAIKHONGGIAN" ColumnName="MALOAIKHONGGIAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOAIMONs">
+      <EntityTypeMapping TypeName="UGANI_1Model.LOAIMON">
+        <MappingFragment StoreEntitySet="LOAIMON">
+          <ScalarProperty Name="TENLOAIMON" ColumnName="TENLOAIMON" />
+          <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MONANs">
+      <EntityTypeMapping TypeName="UGANI_1Model.MONAN">
+        <MappingFragment StoreEntitySet="MONAN">
+          <ScalarProperty Name="DVT" ColumnName="DVT" />
+          <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+          <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+          <ScalarProperty Name="TENMONAN" ColumnName="TENMONAN" />
+          <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
+          <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

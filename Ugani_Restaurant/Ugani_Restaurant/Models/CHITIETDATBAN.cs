@@ -15,14 +15,14 @@ namespace Ugani_Restaurant.Models
     public partial class CHITIETDATBAN
     {
         public int STT { get; set; }
-        public string MAKH { get; set; }
+        public int MAHD { get; set; }
         public string MABAN { get; set; }
         public Nullable<System.DateTime> NGAYDAT { get; set; }
         public Nullable<System.DateTime> GIODATBAN { get; set; }
         public Nullable<System.DateTime> GIOTRABAN { get; set; }
         public string GHICHU { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         public virtual BANAN BANAN { get; set; }
+        public virtual HOADON HOADON { get; set; }
     }
 }

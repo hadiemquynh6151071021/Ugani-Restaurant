@@ -81,6 +81,7 @@
             ngaydat: date.toUTCString()
         };
         selectedItems.push(itemDetail);
+        
     });
 
     $('#submit-button').click(function () {
@@ -90,7 +91,7 @@
             data: { selectedItems: selectedItems }, // Gửi dãy selectedItems lên máy chủ
             success: function (response) {
                 // Xử lý kết quả trả về từ máy chủ (nếu cần)
-                window.location.href = "/HOADON/";
+                window.location.href = "/Home/ShowBill";
             },
             error: function (error) {
                 console.log(error);

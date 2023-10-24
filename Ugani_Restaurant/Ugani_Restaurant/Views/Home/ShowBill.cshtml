@@ -1,0 +1,100 @@
+﻿@model Ugani_Restaurant.Models.HOADON
+
+@{
+    ViewBag.Title = "ShowBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div id="box-bill" class="rounded-3 w-75 border border-secondary-subtle m-auto p-5">
+        <h4 class="text-center">HÓA ĐƠN</h4>
+        <hr />
+        <div class="text-center">
+            @Html.DisplayNameFor(model => model.AspNetUser.FullName)
+            @Html.DisplayFor(model => model.AspNetUser.FullName)
+        </div>
+        <div class="text-center">
+            @Html.DisplayNameFor(model => model.NGAYLAPHD)
+            @Html.DisplayFor(model => model.NGAYLAPHD)
+        </div>
+        <table class="w-100">
+            <tr>
+                <th class="w-25 text-center">
+                    Tên món ăn
+                </th>
+                <th class="w-25 text-center">
+                    Đơn giá
+                </th>
+                <th class="w-25 text-center">
+                    Số lượng
+                </th>
+                <th class="w-25 text-center">
+                    ĐVT
+                </th>
+                <th class="w-50 text-center">
+                </th>
+            </tr>
+            @foreach (var item in ViewBag.ChiTietDatMon)
+            {
+        <tr>
+            <td class="w-25 text-center">
+                @item.MONAN.TENMONAN
+            </td>
+            <td class="w-25 text-center">
+                @item.MONAN.DONGIA
+            </td>
+            <td class="w-25 text-center">
+                @item.SOLUONG
+            </td>
+            <td class="w-25 text-center">
+                @item.MONAN.DVT
+            </td>
+            <td class="w-50 text-center">
+                @Html.DisplayNameFor(model => model.TONGTIEN)<br />
+                @Html.DisplayFor(model => model.TONGTIEN)
+            </td>
+        </tr>
+            }
+        </table>
+
+    </div>
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TONGTIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONGTIEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TINHTRANG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TINHTRANG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYLAPHD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYLAPHD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
+
+    </dl>*@
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MAHD }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

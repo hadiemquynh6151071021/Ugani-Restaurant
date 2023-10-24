@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -77,8 +78,20 @@ namespace Ugani_Restaurant.Controllers
         {
             if (ModelState.IsValid)
             {
+                string idKH = User.Identity.GetUserId();
+                DateTime dateTime = DateTime.Now;
+                HOADON hOADON = new HOADON();
+                hOADON.MAKH = idKH;
+                hOADON.TONGTIEN = 0;
+                hOADON.TINHTRANG = "Đang chờ";                
+                hOADON.NGAYLAPHD = dateTime;
+                db.HOADONs.Add(hOADON);
+                db.SaveChanges();
+
+                int maHD = db.HOADONs.Where(m => m.MAKH == idKH).OrderByDescending(m => m.NGAYLAPHD).ToList().First().MAHD;
+
                 CHITIETDATBAN cHITIETDATBAN = new CHITIETDATBAN();
-                cHITIETDATBAN.MAKH = User.Identity.GetUserId();
+                cHITIETDATBAN.MAHD = maHD;
                 cHITIETDATBAN.NGAYDAT = date.Date;
                 cHITIETDATBAN.GIODATBAN = startTime;
                 cHITIETDATBAN.GIOTRABAN = endTime;
@@ -91,14 +104,20 @@ namespace Ugani_Restaurant.Controllers
             return RedirectToAction("About");
         }
 
-        [HttpGet]
-        public ActionResult ShowBill(string id)
+        public ActionResult ShowBill()
         {
-            if (id == null)
+            string idKH = User.Identity.GetUserId();
+            HOADON hOADON = db.HOADONs.Where(m => m.MAKH == idKH).OrderByDescending(m => m.NGAYLAPHD).ToList().First();
+            List<CHITIETDATMONAN> cHITIETDATMONANs = db.CHITIETDATMONANs.Where(m => m.MAHD == hOADON.MAHD).ToList();
+            ViewBag.ChiTietDatMon = cHITIETDATMONANs;
+            decimal tongTien = 0;
+            foreach(var item in cHITIETDATMONANs)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                tongTien = (decimal)(tongTien + (item.MONAN.DONGIA*item.SOLUONG));
             }
-            HOADON hOADON = db.HOADONs.Find(id);
+            hOADON.TONGTIEN = tongTien;
+            db.Entry(hOADON).State = EntityState.Modified;
+            db.SaveChanges();
             if (hOADON == null)
             {
                 return HttpNotFound();
@@ -111,8 +130,15 @@ namespace Ugani_Restaurant.Controllers
         {
             if (ModelState.IsValid)
             {
+                string idKH = User.Identity.GetUserId();
+                int maHD = db.HOADONs.Where(m => m.MAKH == idKH).OrderByDescending(m => m.NGAYLAPHD).ToList().First().MAHD;
+                foreach (var item in selectedItems)
+                {
+                    item.MAHD = maHD;
+                }
                 // Làm các thao tác xử lý dữ liệu ở đây, ví dụ: lưu danh sách CHITIETDATMONAN vào CSDL
                 db.CHITIETDATMONANs.AddRange(selectedItems);
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

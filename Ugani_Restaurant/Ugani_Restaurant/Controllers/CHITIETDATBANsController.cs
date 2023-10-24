@@ -17,7 +17,7 @@ namespace Ugani_Restaurant.Controllers
         // GET: CHITIETDATBANs
         public ActionResult Index()
         {
-            var cHITIETDATBANs = db.CHITIETDATBANs.Include(c => c.AspNetUser).Include(c => c.BANAN);
+            var cHITIETDATBANs = db.CHITIETDATBANs.Include(c => c.MAHD).Include(c => c.BANAN);
             return View(cHITIETDATBANs.ToList());
         }
 
@@ -92,56 +92,56 @@ namespace Ugani_Restaurant.Controllers
         // POST: CHITIETDATBANs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "STT,MAKH,MABAN,NGAYDAT,GIODATBAN,GIOTRABAN,GHICHU")] CHITIETDATBAN cHITIETDATBAN)
-        {
-            if (ModelState.IsValid)
-            {
-                db.CHITIETDATBANs.Add(cHITIETDATBAN);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.LOAIKHONGGIAN = db.LOAIKHONGGIANs.ToList();
-            ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
-            ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
-            return View(cHITIETDATBAN);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "STT,MAKH,MABAN,NGAYDAT,GIODATBAN,GIOTRABAN,GHICHU")] CHITIETDATBAN cHITIETDATBAN)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.CHITIETDATBANs.Add(cHITIETDATBAN);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.LOAIKHONGGIAN = db.LOAIKHONGGIANs.ToList();
+        //    ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
+        //    ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
+        //    return View(cHITIETDATBAN);
+        //}
 
         // GET: CHITIETDATBANs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CHITIETDATBAN cHITIETDATBAN = db.CHITIETDATBANs.Find(id);
-            if (cHITIETDATBAN == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
-            ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
-            return View(cHITIETDATBAN);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CHITIETDATBAN cHITIETDATBAN = db.CHITIETDATBANs.Find(id);
+        //    if (cHITIETDATBAN == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
+        //    ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
+        //    return View(cHITIETDATBAN);
+        //}
 
         // POST: CHITIETDATBANs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "STT,MAKH,MABAN,NGAYDAT,GIODATBAN,GIOTRABAN,GHICHU")] CHITIETDATBAN cHITIETDATBAN)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cHITIETDATBAN).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
-            ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
-            return View(cHITIETDATBAN);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "STT,MAKH,MABAN,NGAYDAT,GIODATBAN,GIOTRABAN,GHICHU")] CHITIETDATBAN cHITIETDATBAN)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(cHITIETDATBAN).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", cHITIETDATBAN.MAKH);
+        //    ViewBag.MABAN = new SelectList(db.BANANs, "MABAN", "MABAN", cHITIETDATBAN.MABAN);
+        //    return View(cHITIETDATBAN);
+        //}
 
         // GET: CHITIETDATBANs/Delete/5
         public ActionResult Delete(int? id)

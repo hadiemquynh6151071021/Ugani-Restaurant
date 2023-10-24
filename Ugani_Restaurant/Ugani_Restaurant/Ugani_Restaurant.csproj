@@ -174,7 +174,6 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BANANsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HOADONsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\KHUYENMAIsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LOAIKHONGGIANsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LOAIMONsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MONANsController.cs" />
@@ -215,9 +214,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\KHUYENMAI.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LOAIKHONGGIAN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -418,9 +414,6 @@
     <Content Include="Areas\Admin\Views\MONANs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BANANs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\KHUYENMAIs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\KHUYENMAIs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\KHUYENMAIs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HOADONs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HOADONs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\HOADONs\Details.cshtml" />
@@ -495,12 +488,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Booking.cshtml" />
     <Content Include="Views\Home\_listTable.cshtml" />
-    <Content Include="Views\CHITIETDATBANs\Create.cshtml" />
     <Content Include="Views\CHITIETDATBANs\Delete.cshtml" />
     <Content Include="Views\CHITIETDATBANs\Details.cshtml" />
-    <Content Include="Views\CHITIETDATBANs\Edit.cshtml" />
-    <Content Include="Views\CHITIETDATBANs\Index.cshtml" />
     <Content Include="Views\Home\BookingFoods.cshtml" />
+    <Content Include="Views\CHITIETDATBANs\Index.cshtml" />
+    <Content Include="Views\Home\ShowBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

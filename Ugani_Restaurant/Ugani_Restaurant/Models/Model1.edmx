@@ -79,7 +79,7 @@
             <PropertyRef Name="STT" />
           </Key>
           <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MAHD" Type="int" Nullable="false" />
           <Property Name="MABAN" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="NGAYDAT" Type="date" />
           <Property Name="GIODATBAN" Type="datetime" />
@@ -91,7 +91,7 @@
             <PropertyRef Name="STT" />
           </Key>
           <Property Name="STT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MAHD" Type="int" Nullable="false" />
           <Property Name="MAMONAN" Type="int" Nullable="false" />
           <Property Name="SOLUONG" Type="int" />
           <Property Name="NGAYDAT" Type="date" />
@@ -104,16 +104,7 @@
           <Property Name="MAKH" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="TONGTIEN" Type="decimal" Precision="18" Scale="0" />
           <Property Name="TINHTRANG" Type="nvarchar" MaxLength="128" />
-        </EntityType>
-        <EntityType Name="KHUYENMAI">
-          <Key>
-            <PropertyRef Name="MAKM" />
-          </Key>
-          <Property Name="MAKM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TENIMG" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="TILE" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="NGAYBATDAU" Type="datetime" />
-          <Property Name="NGAYKETTHUC" Type="datetime" />
+          <Property Name="NGAYLAPHD" Type="datetime" />
         </EntityType>
         <EntityType Name="LOAIKHONGGIAN">
           <Key>
@@ -154,6 +145,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_CHITIETDATBAN_HOADON">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="MAHD" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="MAHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -211,14 +214,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RBTV_PF_1_DANHSACHMONAN">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
           <End Role="CHITIETDATMONAN" Type="Self.CHITIETDATMONAN" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="HOADON">
+              <PropertyRef Name="MAHD" />
             </Principal>
             <Dependent Role="CHITIETDATMONAN">
-              <PropertyRef Name="MAKH" />
+              <PropertyRef Name="MAHD" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -231,18 +234,6 @@
             </Principal>
             <Dependent Role="BANAN">
               <PropertyRef Name="MAKHONGGIAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF1_DANHSACHBAN">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CHITIETDATBAN">
-              <PropertyRef Name="MAKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -305,11 +296,14 @@
           <EntitySet Name="CHITIETDATBAN" EntityType="Self.CHITIETDATBAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHITIETDATMONAN" EntityType="Self.CHITIETDATMONAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KHUYENMAI" EntityType="Self.KHUYENMAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIKHONGGIAN" EntityType="Self.LOAIKHONGGIAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIMON" EntityType="Self.LOAIMON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MONAN" EntityType="Self.MONAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHITIETDATBAN_HOADON" Association="Self.FK_CHITIETDATBAN_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -327,16 +321,12 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="RBTV_PF_1_DANHSACHMONAN" Association="Self.RBTV_PF_1_DANHSACHMONAN">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="HOADON" EntitySet="HOADON" />
             <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONAN" />
           </AssociationSet>
           <AssociationSet Name="RBTV_PF_BANAN" Association="Self.RBTV_PF_BANAN">
             <End Role="LOAIKHONGGIAN" EntitySet="LOAIKHONGGIAN" />
             <End Role="BANAN" EntitySet="BANAN" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF1_DANHSACHBAN" Association="Self.RBTV_PF1_DANHSACHBAN">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
           </AssociationSet>
           <AssociationSet Name="RBTV_PF1_HOADON" Association="Self.RBTV_PF1_HOADON">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -417,98 +407,8 @@
           <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="CHITIETDATMONANs" Relationship="Self.RBTV_PF_1_DANHSACHMONAN" FromRole="AspNetUsers" ToRole="CHITIETDATMONAN" />
-          <NavigationProperty Name="CHITIETDATBANs" Relationship="Self.RBTV_PF1_DANHSACHBAN" FromRole="AspNetUsers" ToRole="CHITIETDATBAN" />
-          <NavigationProperty Name="HOADONs" Relationship="Self.RBTV_PF1_HOADON" FromRole="AspNetUsers" ToRole="HOADON" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="BANAN">
-          <Key>
-            <PropertyRef Name="MABAN" />
-          </Key>
-          <Property Name="MABAN" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="MAKHONGGIAN" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LOAIKHONGGIAN" Relationship="Self.RBTV_PF_BANAN" FromRole="BANAN" ToRole="LOAIKHONGGIAN" />
-          <NavigationProperty Name="CHITIETDATBANs" Relationship="Self.RBTV_PF2_DANHSACHBAN" FromRole="BANAN" ToRole="CHITIETDATBAN" />
-        </EntityType>
-        <EntityType Name="CHITIETDATBAN">
-          <Key>
-            <PropertyRef Name="STT" />
-          </Key>
-          <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MAKH" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MABAN" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
-          <Property Name="GIODATBAN" Type="DateTime" Precision="3" />
-          <Property Name="GIOTRABAN" Type="DateTime" Precision="3" />
-          <Property Name="GHICHU" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.RBTV_PF1_DANHSACHBAN" FromRole="CHITIETDATBAN" ToRole="AspNetUsers" />
-          <NavigationProperty Name="BANAN" Relationship="Self.RBTV_PF2_DANHSACHBAN" FromRole="CHITIETDATBAN" ToRole="BANAN" />
-        </EntityType>
-        <EntityType Name="CHITIETDATMONAN">
-          <Key>
-            <PropertyRef Name="STT" />
-          </Key>
-          <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MAKH" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MAMONAN" Type="Int32" Nullable="false" />
-          <Property Name="SOLUONG" Type="Int32" />
-          <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.RBTV_PF_1_DANHSACHMONAN" FromRole="CHITIETDATMONAN" ToRole="AspNetUsers" />
-          <NavigationProperty Name="MONAN" Relationship="Self.RBTV_PF2_DANHSACHMONAN" FromRole="CHITIETDATMONAN" ToRole="MONAN" />
-        </EntityType>
-        <EntityType Name="HOADON">
-          <Key>
-            <PropertyRef Name="MAHD" />
-          </Key>
-          <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MAKH" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TONGTIEN" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="TINHTRANG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.RBTV_PF1_HOADON" FromRole="HOADON" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="KHUYENMAI">
-          <Key>
-            <PropertyRef Name="MAKM" />
-          </Key>
-          <Property Name="MAKM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TENIMG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TILE" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="NGAYBATDAU" Type="DateTime" Precision="3" />
-          <Property Name="NGAYKETTHUC" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="LOAIKHONGGIAN">
-          <Key>
-            <PropertyRef Name="MALOAIKHONGGIAN" />
-          </Key>
-          <Property Name="MALOAIKHONGGIAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TENLOAIKHONGGIAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IMG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="MOTA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DONGIA" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DVT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BANANs" Relationship="Self.RBTV_PF_BANAN" FromRole="LOAIKHONGGIAN" ToRole="BANAN" />
-        </EntityType>
-        <EntityType Name="LOAIMON">
-          <Key>
-            <PropertyRef Name="MALOAIMON" />
-          </Key>
-          <Property Name="MALOAIMON" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TENLOAIMON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MONANs" Relationship="Self.RBTV1_PF_MONAN" FromRole="LOAIMON" ToRole="MONAN" />
-        </EntityType>
-        <EntityType Name="MONAN">
-          <Key>
-            <PropertyRef Name="MAMONAN" />
-          </Key>
-          <Property Name="MAMONAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MALOAIMON" Type="Int32" Nullable="false" />
-          <Property Name="TENMONAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HINHANH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DONGIA" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DVT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CHITIETDATMONANs" Relationship="Self.RBTV_PF2_DANHSACHMONAN" FromRole="MONAN" ToRole="CHITIETDATMONAN" />
-          <NavigationProperty Name="LOAIMON" Relationship="Self.RBTV1_PF_MONAN" FromRole="MONAN" ToRole="LOAIMON" />
+          <NavigationProperty Name="HOADONs" Relationship="UGANI_1Model.RBTV_PF1_HOADON" FromRole="AspNetUser" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -548,90 +448,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RBTV_PF_1_DANHSACHMONAN">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="CHITIETDATMONAN" Type="Self.CHITIETDATMONAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CHITIETDATMONAN">
-              <PropertyRef Name="MAKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF1_DANHSACHBAN">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CHITIETDATBAN">
-              <PropertyRef Name="MAKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF1_HOADON">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HOADON">
-              <PropertyRef Name="MAKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF_BANAN">
-          <End Role="LOAIKHONGGIAN" Type="Self.LOAIKHONGGIAN" Multiplicity="1" />
-          <End Role="BANAN" Type="Self.BANAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LOAIKHONGGIAN">
-              <PropertyRef Name="MALOAIKHONGGIAN" />
-            </Principal>
-            <Dependent Role="BANAN">
-              <PropertyRef Name="MAKHONGGIAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF2_DANHSACHBAN">
-          <End Role="BANAN" Type="Self.BANAN" Multiplicity="1" />
-          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BANAN">
-              <PropertyRef Name="MABAN" />
-            </Principal>
-            <Dependent Role="CHITIETDATBAN">
-              <PropertyRef Name="MABAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV_PF2_DANHSACHMONAN">
-          <End Role="MONAN" Type="Self.MONAN" Multiplicity="1" />
-          <End Role="CHITIETDATMONAN" Type="Self.CHITIETDATMONAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MONAN">
-              <PropertyRef Name="MAMONAN" />
-            </Principal>
-            <Dependent Role="CHITIETDATMONAN">
-              <PropertyRef Name="MAMONAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RBTV1_PF_MONAN">
-          <End Role="LOAIMON" Type="Self.LOAIMON" Multiplicity="1" />
-          <End Role="MONAN" Type="Self.MONAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LOAIMON">
-              <PropertyRef Name="MALOAIMON" />
-            </Principal>
-            <Dependent Role="MONAN">
-              <PropertyRef Name="MALOAIMON" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -642,14 +458,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="BANANs" EntityType="Self.BANAN" />
-          <EntitySet Name="CHITIETDATBANs" EntityType="Self.CHITIETDATBAN" />
-          <EntitySet Name="CHITIETDATMONANs" EntityType="Self.CHITIETDATMONAN" />
-          <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
-          <EntitySet Name="KHUYENMAIs" EntityType="Self.KHUYENMAI" />
-          <EntitySet Name="LOAIKHONGGIANs" EntityType="Self.LOAIKHONGGIAN" />
-          <EntitySet Name="LOAIMONs" EntityType="Self.LOAIMON" />
-          <EntitySet Name="MONANs" EntityType="Self.MONAN" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -659,39 +467,211 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="RBTV_PF_1_DANHSACHMONAN" Association="Self.RBTV_PF_1_DANHSACHMONAN">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONANs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF1_DANHSACHBAN" Association="Self.RBTV_PF1_DANHSACHBAN">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBANs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF1_HOADON" Association="Self.RBTV_PF1_HOADON">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="HOADON" EntitySet="HOADONs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF_BANAN" Association="Self.RBTV_PF_BANAN">
-            <End Role="LOAIKHONGGIAN" EntitySet="LOAIKHONGGIANs" />
-            <End Role="BANAN" EntitySet="BANANs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF2_DANHSACHBAN" Association="Self.RBTV_PF2_DANHSACHBAN">
-            <End Role="BANAN" EntitySet="BANANs" />
-            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBANs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV_PF2_DANHSACHMONAN" Association="Self.RBTV_PF2_DANHSACHMONAN">
-            <End Role="MONAN" EntitySet="MONANs" />
-            <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONANs" />
-          </AssociationSet>
-          <AssociationSet Name="RBTV1_PF_MONAN" Association="Self.RBTV1_PF_MONAN">
-            <End Role="LOAIMON" EntitySet="LOAIMONs" />
-            <End Role="MONAN" EntitySet="MONANs" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="BANANs" EntityType="UGANI_1Model.BANAN" />
+          <EntitySet Name="CHITIETDATBANs" EntityType="UGANI_1Model.CHITIETDATBAN" />
+          <EntitySet Name="CHITIETDATMONANs" EntityType="UGANI_1Model.CHITIETDATMONAN" />
+          <EntitySet Name="HOADONs" EntityType="UGANI_1Model.HOADON" />
+          <EntitySet Name="LOAIKHONGGIANs" EntityType="UGANI_1Model.LOAIKHONGGIAN" />
+          <EntitySet Name="LOAIMONs" EntityType="UGANI_1Model.LOAIMON" />
+          <EntitySet Name="MONANs" EntityType="UGANI_1Model.MONAN" />
+          <AssociationSet Name="RBTV_PF1_HOADON" Association="UGANI_1Model.RBTV_PF1_HOADON">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="RBTV_PF_BANAN" Association="UGANI_1Model.RBTV_PF_BANAN">
+            <End Role="LOAIKHONGGIAN" EntitySet="LOAIKHONGGIANs" />
+            <End Role="BANAN" EntitySet="BANANs" />
+          </AssociationSet>
+          <AssociationSet Name="RBTV_PF2_DANHSACHBAN" Association="UGANI_1Model.RBTV_PF2_DANHSACHBAN">
+            <End Role="BANAN" EntitySet="BANANs" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHITIETDATBAN_HOADON" Association="UGANI_1Model.FK_CHITIETDATBAN_HOADON">
+            <End Role="HOADON" EntitySet="HOADONs" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBANs" />
+          </AssociationSet>
+          <AssociationSet Name="RBTV_PF_1_DANHSACHMONAN" Association="UGANI_1Model.RBTV_PF_1_DANHSACHMONAN">
+            <End Role="HOADON" EntitySet="HOADONs" />
+            <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONANs" />
+          </AssociationSet>
+          <AssociationSet Name="RBTV_PF2_DANHSACHMONAN" Association="UGANI_1Model.RBTV_PF2_DANHSACHMONAN">
+            <End Role="MONAN" EntitySet="MONANs" />
+            <End Role="CHITIETDATMONAN" EntitySet="CHITIETDATMONANs" />
+          </AssociationSet>
+          <AssociationSet Name="RBTV1_PF_MONAN" Association="UGANI_1Model.RBTV1_PF_MONAN">
+            <End Role="LOAIMON" EntitySet="LOAIMONs" />
+            <End Role="MONAN" EntitySet="MONANs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="BANAN">
+          <Key>
+            <PropertyRef Name="MABAN" />
+          </Key>
+          <Property Name="MABAN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MAKHONGGIAN" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LOAIKHONGGIAN" Relationship="UGANI_1Model.RBTV_PF_BANAN" FromRole="BANAN" ToRole="LOAIKHONGGIAN" />
+          <NavigationProperty Name="CHITIETDATBANs" Relationship="UGANI_1Model.RBTV_PF2_DANHSACHBAN" FromRole="BANAN" ToRole="CHITIETDATBAN" />
+        </EntityType>
+        <EntityType Name="CHITIETDATBAN">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAHD" Type="Int32" Nullable="false" />
+          <Property Name="MABAN" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
+          <Property Name="GIODATBAN" Type="DateTime" Precision="3" />
+          <Property Name="GIOTRABAN" Type="DateTime" Precision="3" />
+          <Property Name="GHICHU" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BANAN" Relationship="UGANI_1Model.RBTV_PF2_DANHSACHBAN" FromRole="CHITIETDATBAN" ToRole="BANAN" />
+          <NavigationProperty Name="HOADON" Relationship="UGANI_1Model.FK_CHITIETDATBAN_HOADON" FromRole="CHITIETDATBAN" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="CHITIETDATMONAN">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAHD" Type="Int32" Nullable="false" />
+          <Property Name="MAMONAN" Type="Int32" Nullable="false" />
+          <Property Name="SOLUONG" Type="Int32" />
+          <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HOADON" Relationship="UGANI_1Model.RBTV_PF_1_DANHSACHMONAN" FromRole="CHITIETDATMONAN" ToRole="HOADON" />
+          <NavigationProperty Name="MONAN" Relationship="UGANI_1Model.RBTV_PF2_DANHSACHMONAN" FromRole="CHITIETDATMONAN" ToRole="MONAN" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="MAHD" />
+          </Key>
+          <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAKH" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TONGTIEN" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TINHTRANG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYLAPHD" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="UGANI_1Model.RBTV_PF1_HOADON" FromRole="HOADON" ToRole="AspNetUser" />
+          <NavigationProperty Name="CHITIETDATBANs" Relationship="UGANI_1Model.FK_CHITIETDATBAN_HOADON" FromRole="HOADON" ToRole="CHITIETDATBAN" />
+          <NavigationProperty Name="CHITIETDATMONANs" Relationship="UGANI_1Model.RBTV_PF_1_DANHSACHMONAN" FromRole="HOADON" ToRole="CHITIETDATMONAN" />
+        </EntityType>
+        <EntityType Name="LOAIKHONGGIAN">
+          <Key>
+            <PropertyRef Name="MALOAIKHONGGIAN" />
+          </Key>
+          <Property Name="MALOAIKHONGGIAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENLOAIKHONGGIAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MOTA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DONGIA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DVT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BANANs" Relationship="UGANI_1Model.RBTV_PF_BANAN" FromRole="LOAIKHONGGIAN" ToRole="BANAN" />
+        </EntityType>
+        <EntityType Name="LOAIMON">
+          <Key>
+            <PropertyRef Name="MALOAIMON" />
+          </Key>
+          <Property Name="MALOAIMON" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENLOAIMON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MONANs" Relationship="UGANI_1Model.RBTV1_PF_MONAN" FromRole="LOAIMON" ToRole="MONAN" />
+        </EntityType>
+        <EntityType Name="MONAN">
+          <Key>
+            <PropertyRef Name="MAMONAN" />
+          </Key>
+          <Property Name="MAMONAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MALOAIMON" Type="Int32" Nullable="false" />
+          <Property Name="TENMONAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HINHANH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DONGIA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DVT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CHITIETDATMONANs" Relationship="UGANI_1Model.RBTV_PF2_DANHSACHMONAN" FromRole="MONAN" ToRole="CHITIETDATMONAN" />
+          <NavigationProperty Name="LOAIMON" Relationship="UGANI_1Model.RBTV1_PF_MONAN" FromRole="MONAN" ToRole="LOAIMON" />
+        </EntityType>
+        <Association Name="RBTV_PF1_HOADON">
+          <End Type="UGANI_1Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="UGANI_1Model.HOADON" Role="HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RBTV_PF_BANAN">
+          <End Type="UGANI_1Model.LOAIKHONGGIAN" Role="LOAIKHONGGIAN" Multiplicity="1" />
+          <End Type="UGANI_1Model.BANAN" Role="BANAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIKHONGGIAN">
+              <PropertyRef Name="MALOAIKHONGGIAN" />
+            </Principal>
+            <Dependent Role="BANAN">
+              <PropertyRef Name="MAKHONGGIAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RBTV_PF2_DANHSACHBAN">
+          <End Type="UGANI_1Model.BANAN" Role="BANAN" Multiplicity="1" />
+          <End Type="UGANI_1Model.CHITIETDATBAN" Role="CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANAN">
+              <PropertyRef Name="MABAN" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="MABAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHITIETDATBAN_HOADON">
+          <End Type="UGANI_1Model.HOADON" Role="HOADON" Multiplicity="1" />
+          <End Type="UGANI_1Model.CHITIETDATBAN" Role="CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="MAHD" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="MAHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RBTV_PF_1_DANHSACHMONAN">
+          <End Type="UGANI_1Model.HOADON" Role="HOADON" Multiplicity="1" />
+          <End Type="UGANI_1Model.CHITIETDATMONAN" Role="CHITIETDATMONAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="MAHD" />
+            </Principal>
+            <Dependent Role="CHITIETDATMONAN">
+              <PropertyRef Name="MAHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RBTV_PF2_DANHSACHMONAN">
+          <End Type="UGANI_1Model.MONAN" Role="MONAN" Multiplicity="1" />
+          <End Type="UGANI_1Model.CHITIETDATMONAN" Role="CHITIETDATMONAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="MAMONAN" />
+            </Principal>
+            <Dependent Role="CHITIETDATMONAN">
+              <PropertyRef Name="MAMONAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RBTV1_PF_MONAN">
+          <End Type="UGANI_1Model.LOAIMON" Role="LOAIMON" Multiplicity="1" />
+          <End Type="UGANI_1Model.MONAN" Role="MONAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIMON">
+              <PropertyRef Name="MALOAIMON" />
+            </Principal>
+            <Dependent Role="MONAN">
+              <PropertyRef Name="MALOAIMON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -754,91 +734,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BANANs">
-            <EntityTypeMapping TypeName="UGANI_1Model.BANAN">
-              <MappingFragment StoreEntitySet="BANAN">
-                <ScalarProperty Name="MABAN" ColumnName="MABAN" />
-                <ScalarProperty Name="MAKHONGGIAN" ColumnName="MAKHONGGIAN" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CHITIETDATBANs">
-            <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATBAN">
-              <MappingFragment StoreEntitySet="CHITIETDATBAN">
-                <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-                <ScalarProperty Name="MABAN" ColumnName="MABAN" />
-                <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
-                <ScalarProperty Name="GIODATBAN" ColumnName="GIODATBAN" />
-                <ScalarProperty Name="GIOTRABAN" ColumnName="GIOTRABAN" />
-                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CHITIETDATMONANs">
-            <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATMONAN">
-              <MappingFragment StoreEntitySet="CHITIETDATMONAN">
-                <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-                <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
-                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-                <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HOADONs">
-            <EntityTypeMapping TypeName="UGANI_1Model.HOADON">
-              <MappingFragment StoreEntitySet="HOADON">
-                <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
-                <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KHUYENMAIs">
-            <EntityTypeMapping TypeName="UGANI_1Model.KHUYENMAI">
-              <MappingFragment StoreEntitySet="KHUYENMAI">
-                <ScalarProperty Name="MAKM" ColumnName="MAKM" />
-                <ScalarProperty Name="TENIMG" ColumnName="TENIMG" />
-                <ScalarProperty Name="TILE" ColumnName="TILE" />
-                <ScalarProperty Name="NGAYBATDAU" ColumnName="NGAYBATDAU" />
-                <ScalarProperty Name="NGAYKETTHUC" ColumnName="NGAYKETTHUC" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LOAIKHONGGIANs">
-            <EntityTypeMapping TypeName="UGANI_1Model.LOAIKHONGGIAN">
-              <MappingFragment StoreEntitySet="LOAIKHONGGIAN">
-                <ScalarProperty Name="MALOAIKHONGGIAN" ColumnName="MALOAIKHONGGIAN" />
-                <ScalarProperty Name="TENLOAIKHONGGIAN" ColumnName="TENLOAIKHONGGIAN" />
-                <ScalarProperty Name="IMG" ColumnName="IMG" />
-                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
-                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
-                <ScalarProperty Name="DVT" ColumnName="DVT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LOAIMONs">
-            <EntityTypeMapping TypeName="UGANI_1Model.LOAIMON">
-              <MappingFragment StoreEntitySet="LOAIMON">
-                <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
-                <ScalarProperty Name="TENLOAIMON" ColumnName="TENLOAIMON" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MONANs">
-            <EntityTypeMapping TypeName="UGANI_1Model.MONAN">
-              <MappingFragment StoreEntitySet="MONAN">
-                <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
-                <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
-                <ScalarProperty Name="TENMONAN" ColumnName="TENMONAN" />
-                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
-                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
-                <ScalarProperty Name="DVT" ColumnName="DVT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="UGANI_1Model.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -858,6 +753,81 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BANANs">
+            <EntityTypeMapping TypeName="UGANI_1Model.BANAN">
+              <MappingFragment StoreEntitySet="BANAN">
+                <ScalarProperty Name="MAKHONGGIAN" ColumnName="MAKHONGGIAN" />
+                <ScalarProperty Name="MABAN" ColumnName="MABAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHITIETDATBANs">
+            <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATBAN">
+              <MappingFragment StoreEntitySet="CHITIETDATBAN">
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="GIOTRABAN" ColumnName="GIOTRABAN" />
+                <ScalarProperty Name="GIODATBAN" ColumnName="GIODATBAN" />
+                <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
+                <ScalarProperty Name="MABAN" ColumnName="MABAN" />
+                <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHITIETDATMONANs">
+            <EntityTypeMapping TypeName="UGANI_1Model.CHITIETDATMONAN">
+              <MappingFragment StoreEntitySet="CHITIETDATMONAN">
+                <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
+                <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADONs">
+            <EntityTypeMapping TypeName="UGANI_1Model.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="NGAYLAPHD" ColumnName="NGAYLAPHD" />
+                <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
+                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+                <ScalarProperty Name="MAHD" ColumnName="MAHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIKHONGGIANs">
+            <EntityTypeMapping TypeName="UGANI_1Model.LOAIKHONGGIAN">
+              <MappingFragment StoreEntitySet="LOAIKHONGGIAN">
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+                <ScalarProperty Name="TENLOAIKHONGGIAN" ColumnName="TENLOAIKHONGGIAN" />
+                <ScalarProperty Name="MALOAIKHONGGIAN" ColumnName="MALOAIKHONGGIAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIMONs">
+            <EntityTypeMapping TypeName="UGANI_1Model.LOAIMON">
+              <MappingFragment StoreEntitySet="LOAIMON">
+                <ScalarProperty Name="TENLOAIMON" ColumnName="TENLOAIMON" />
+                <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONANs">
+            <EntityTypeMapping TypeName="UGANI_1Model.MONAN">
+              <MappingFragment StoreEntitySet="MONAN">
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+                <ScalarProperty Name="TENMONAN" ColumnName="TENMONAN" />
+                <ScalarProperty Name="MALOAIMON" ColumnName="MALOAIMON" />
+                <ScalarProperty Name="MAMONAN" ColumnName="MAMONAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
