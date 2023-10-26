@@ -180,6 +180,7 @@
     <Compile Include="Areas\Admin\Controllers\SystemManagementController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CHITIETDATBANsController.cs" />
+    <Compile Include="Controllers\HOADONsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -494,6 +495,9 @@
     <Content Include="Views\Home\BookingFoods.cshtml" />
     <Content Include="Views\CHITIETDATBANs\Index.cshtml" />
     <Content Include="Views\Home\ShowBill.cshtml" />
+    <Content Include="Views\HOADONs\Index.cshtml" />
+    <Content Include="Views\Home\ListBill.cshtml" />
+    <Content Include="Views\Home\DetailsBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

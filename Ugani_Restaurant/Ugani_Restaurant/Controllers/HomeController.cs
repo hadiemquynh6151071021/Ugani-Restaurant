@@ -18,6 +18,30 @@ namespace Ugani_Restaurant.Controllers
             return View();
         }
 
+        public ActionResult ListBill()
+        {
+            string makh = User.Identity.GetUserId();
+            var hOADONs = db.HOADONs.Include(h => h.AspNetUser).Where(h => h.MAKH == makh).OrderByDescending(h => h.NGAYLAPHD);
+            return View(hOADONs.ToList());
+        }
+
+        // GET: HOADONs/Details/5
+        public ActionResult DetailsBill(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HOADON hOADON = db.HOADONs.Find(id);
+            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == id).ToList().First();
+            ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == id).ToList();
+            if (hOADON == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hOADON);
+        }
+
         public ActionResult Booking()
         {
             return View(db.LOAIKHONGGIANs.ToList());
@@ -109,6 +133,8 @@ namespace Ugani_Restaurant.Controllers
             string idKH = User.Identity.GetUserId();
             HOADON hOADON = db.HOADONs.Where(m => m.MAKH == idKH).OrderByDescending(m => m.NGAYLAPHD).ToList().First();
             List<CHITIETDATMONAN> cHITIETDATMONANs = db.CHITIETDATMONANs.Where(m => m.MAHD == hOADON.MAHD).ToList();
+            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == hOADON.MAHD).ToList().First();
+            ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == hOADON.MAHD).ToList();
             ViewBag.ChiTietDatMon = cHITIETDATMONANs;
             decimal tongTien = 0;
             foreach(var item in cHITIETDATMONANs)
