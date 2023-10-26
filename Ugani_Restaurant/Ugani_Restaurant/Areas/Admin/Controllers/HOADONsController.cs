@@ -18,7 +18,7 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         // GET: Admin/HOADONs
         public ActionResult Index()
         {
-            var hOADONs = db.HOADONs.Include(h => h.AspNetUser);
+            var hOADONs = db.HOADONs.OrderByDescending(m => m.TINHTRANG).Include(h => h.AspNetUser);
             return View(hOADONs.ToList());
         }
 
@@ -76,6 +76,23 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             }
             ViewBag.MAKH = new SelectList(db.AspNetUsers, "Id", "UserName", hOADON.MAKH);
             return View(hOADON);
+        }
+
+        [HttpPost]
+        public ActionResult Confirm(int id)
+        {
+            HOADON hOADON = db.HOADONs.Find(id);
+
+            return PartialView("Confirm", hOADON);
+        }
+
+        public ActionResult ConfirmSubmit(int CatId)
+        {
+            HOADON hOADON = db.HOADONs.Find(CatId);
+            hOADON.TINHTRANG = "Đã duyệt";
+            db.Entry(hOADON).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/HOADONs/Edit/5

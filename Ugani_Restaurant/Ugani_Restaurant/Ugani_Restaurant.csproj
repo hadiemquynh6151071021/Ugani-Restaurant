@@ -433,6 +433,7 @@
     <Content Include="Areas\Admin\Views\LOAIKHONGGIANs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\LOAIMONs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\MONANs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HOADONs\Confirm.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chart\chart-area-demo.js" />
     <Content Include="Scripts\chart\chart-pie-demo.js" />

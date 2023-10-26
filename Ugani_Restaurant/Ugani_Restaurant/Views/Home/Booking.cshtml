@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 @*flatpickr*@
@@ -17,7 +16,7 @@
     <div class="d-flex flex-md-row mt-4 flex-column gap-3">
         <div class="d-flex flex-row gap-3">
             <label>Ngày đặt</label>
-            @Html.TextBox("datepicker", null, new { @id = "datepicker", type = "text", placeholder = DateTime.Now.Date.ToString("MM/dd/yyyy") })
+            @Html.TextBox("datepicker", null, new { @id = "datepicker", type = "text" })
         </div>
         <div class="d-flex flex-row gap-3">
             <label>Giờ đặt</label>
@@ -107,20 +106,26 @@
 
 
     flatpickr("#datepicker", {
-        enableTime: false, // Không cho phép chọn giờ cho thẻ lịch
-        dateFormat: "Y-m-d", // Định dạng ngày (tuỳ chỉnh)
+        enableTime: false,
+        dateFormat: "Y-m-d",
+        minDate: new Date().fp_incr(2),  // Đặt ngày tối thiểu là ngày hiện tại + 2 ngày
+        defaultDate: new Date().fp_incr(2), // Đặt giá trị mặc định là ngày hiện tại + 2 ngày
     });
 
     flatpickr("#startTime", {
         enableTime: true, // Cho phép chọn giờ cho thẻ giờ bắt đầu
         noCalendar: true, // Ẩn lịch
         dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+        minTime: "08:00",  // Giờ tối thiểu là 8:00 AM
+        maxTime: "20:00"   // Giờ tối đa là 8:00 PM
     });
 
     flatpickr("#endTime", {
         enableTime: true, // Cho phép chọn giờ cho thẻ giờ kết thúc
         noCalendar: true, // Ẩn lịch
         dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
+        minTime: "09:00",  // Giờ tối thiểu là 8:00 AM
+        maxTime: "22:00"   // Giờ tối đa là 8:00 PM
     });
 
 </script>
