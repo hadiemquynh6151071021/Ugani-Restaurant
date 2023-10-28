@@ -12,6 +12,8 @@ namespace Ugani_Restaurant.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class UGANI_1Entities : DbContext
     {
@@ -38,5 +40,23 @@ namespace Ugani_Restaurant.Models
         public virtual DbSet<LOAIKHONGGIAN> LOAIKHONGGIANs { get; set; }
         public virtual DbSet<LOAIMON> LOAIMONs { get; set; }
         public virtual DbSet<MONAN> MONANs { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> ListYear()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ListYear");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> ThongKeTongTienTheoThangNamVaTinhTrang(Nullable<int> thang, Nullable<int> nam)
+        {
+            var thangParameter = thang.HasValue ?
+                new ObjectParameter("Thang", thang) :
+                new ObjectParameter("Thang", typeof(int));
+    
+            var namParameter = nam.HasValue ?
+                new ObjectParameter("Nam", nam) :
+                new ObjectParameter("Nam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("ThongKeTongTienTheoThangNamVaTinhTrang", thangParameter, namParameter);
+        }
     }
 }

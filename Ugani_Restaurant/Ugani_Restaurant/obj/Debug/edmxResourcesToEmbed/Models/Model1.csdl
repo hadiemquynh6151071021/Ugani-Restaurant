@@ -157,6 +157,11 @@
       <End Role="LOAIMON" EntitySet="LOAIMONs" />
       <End Role="MONAN" EntitySet="MONANs" />
     </AssociationSet>
+    <FunctionImport Name="ListYear" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="ThongKeTongTienTheoThangNamVaTinhTrang" ReturnType="Collection(Decimal)">
+      <Parameter Name="Thang" Mode="In" Type="Int32" />
+      <Parameter Name="Nam" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="BANAN">
     <Key>

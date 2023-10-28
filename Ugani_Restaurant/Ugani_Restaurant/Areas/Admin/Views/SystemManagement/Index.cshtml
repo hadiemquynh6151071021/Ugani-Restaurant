@@ -4,5 +4,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <h3 class="m-2 text-center">Thống Kê Doanh Thu</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex flex-row gap-4">
+                <select id="ddlYear" class="form-control" style="width:120px;">
+                    <option value="0">Chọn năm</option>
+                    @foreach (var item in ViewBag.ListYears)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <select id="ddlYear" class="form-control" style="width:140px;">
+                    <option value="0">Chọn tháng</option>
+                    @for (int i = 1; i < 13; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+            <div>
+
+            </div>
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/chart/Chart.min.js"></script>
+
+    <script>
+
+            $('#ddlYear').on('change', function () {
+                var year = $(this).val();
+
+                $.get('/HOADONs/GetResultReport?year=' + year, function (resp) {
+                    ResgisterChart(resp);
+                });
+            });
+
+
+
+            function ResgisterChart(lsData) {
+                var lsLabel = [];
+                var lsDataSource = [];
+                $.each(lsData, function (index, item) {
+                    lsLabel.push(item.MONTH)
+                    lsDataSource.push(item.TOTAL);
+                });
+
+                console.log(lsDataSource);
+
+                var ctx = document.getElementById("canvas");
+
+                var barChartData = {
+                    labels:lsLabel,
+                    datasets: [{
+                        labels: 'Dataset 1',
+                        backgroundColor: "rgb(15,158,162)",
+                        //borderColor: window.chartColors.red,
+                        borderWidth: 1,
+                        data: lsDataSource
+                    }]
+                };
+
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: barChartData,
+                    //options: options
+                });
+            }
+
+    </script>
+}
 

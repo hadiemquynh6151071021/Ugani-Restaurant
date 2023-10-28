@@ -151,5 +151,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ListYear" FunctionName="UGANI_1Model.Store.ListYear" />
+    <FunctionImportMapping FunctionImportName="ThongKeTongTienTheoThangNamVaTinhTrang" FunctionName="UGANI_1Model.Store.ThongKeTongTienTheoThangNamVaTinhTrang" />
   </EntityContainerMapping>
 </Mapping>

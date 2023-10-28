@@ -15,7 +15,14 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         UGANI_1Entities db = new UGANI_1Entities();
         public ActionResult Index()
         {
+            ViewBag.ListYears = getListYear();
             return View();
+        }
+
+        public Object getListYear()
+        {
+            var lsYear = db.ListYear().ToList();
+            return lsYear;
         }
 
         public ActionResult RenderLOAIMONAN()

@@ -280,6 +280,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="ListYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ThongKeTongTienTheoThangNamVaTinhTrang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Thang" Type="int" Mode="In" />
+    <Parameter Name="Nam" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="UGANI_1ModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />

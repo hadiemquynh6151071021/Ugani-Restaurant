@@ -30,6 +30,8 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HOADON hOADON = db.HOADONs.Find(id);
+            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == id).ToList().First();
+            ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == id).ToList();
             if (hOADON == null)
             {
                 return HttpNotFound();

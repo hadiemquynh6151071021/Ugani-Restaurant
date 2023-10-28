@@ -5,52 +5,50 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NGAYLAPHD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TONGTIEN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TINHTRANG)
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="container mt-auto">
+    <h3 class="text-center mt-3">DANH SÁCH ĐƠN HÀNG</h3>
+    <table class="table">
         <tr>
-            <td>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.AspNetUser.FullName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.NGAYLAPHD)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TONGTIEN)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TINHTRANG)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.NGAYLAPHD)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.TONGTIEN)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.TINHTRANG)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.ActionLink("Details", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
                 @Html.ActionLink("Xác nhận", "Confirm", new { id = item.MAHD }, new { @class = "btn btn-danger btn-confirm", @data_toggle = "modal", @data_target = "#modalConfirm", @data_id = item.MAHD })
             </td>
         </tr>
-    }
+        }
 
-</table>
+    </table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="modalConfirm" tabindex="-1" aria-labelledby="modalConfirmLabel" aria-hidden="true">
@@ -65,7 +63,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <button type="button" class="btn btn-primary" id="btn-confirm-submit">Xóa</button>
+                <button type="button" class="btn btn-primary" id="btn-confirm-submit">Xác nhận</button>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
             </div>
         </div>
     </div>

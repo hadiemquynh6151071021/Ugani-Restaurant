@@ -5,41 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table mt-5">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TONGTIEN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TINHTRANG)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NGAYLAPHD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
-        </th>
-        <th></th>
-    </tr>
+<div class="container mt-auto">
+    <h3 class="text-center mt-3">DANH SÁCH ĐƠN HÀNG</h3>
+    <table class="table">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.NGAYLAPHD)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TONGTIEN)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TINHTRANG)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TONGTIEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TINHTRANG)
-        </td>
-        <td>
+        <td class="text-center">
             @Html.DisplayFor(modelItem => item.NGAYLAPHD)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.TONGTIEN)
         </td>
-        <td>
-            @Html.ActionLink("Xem chi tiết", "DetailsBill", new { id=item.MAHD }, new { @class = "btn btn-primary" )
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.TINHTRANG)
+        </td>
+        <td class="text-center">
+            @Html.ActionLink("Xem chi tiết", "DetailsBill", new { id = item.MAHD }, new { @class = "btn btn-primary" })
+            @{
+                if (item.TINHTRANG != "Đã duyệt")
+                {
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MAHD }, new { @class = "btn btn-danger" })
+                }
+            }
         </td>
     </tr>
-}
+        }
 
-</table>
+    </table>
+</div>
