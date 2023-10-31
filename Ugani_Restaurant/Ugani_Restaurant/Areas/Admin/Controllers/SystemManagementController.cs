@@ -25,6 +25,22 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return lsYear;
         }
 
+        public ActionResult GetResultReport(int year, int month)
+        {
+            var lsData = GetReportByYearMonth(year, month);
+            return Json(lsData, JsonRequestBehavior.AllowGet);
+        }
+
+        public List<Report_Result> GetReportByYearMonth(int year, int month)
+        {
+            using (db)
+            {
+                var lsData = db.Report(month, year).ToList();
+                return lsData;
+            }
+        }
+
+
         public ActionResult RenderLOAIMONAN()
         {
             List<LOAIMON> lOAIMONs = db.LOAIMONs.ToList();

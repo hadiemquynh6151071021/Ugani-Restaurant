@@ -152,6 +152,13 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="ListYear" FunctionName="UGANI_1Model.Store.ListYear" />
-    <FunctionImportMapping FunctionImportName="ThongKeTongTienTheoThangNamVaTinhTrang" FunctionName="UGANI_1Model.Store.ThongKeTongTienTheoThangNamVaTinhTrang" />
+    <FunctionImportMapping FunctionImportName="Report" FunctionName="UGANI_1Model.Store.Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="UGANI_1Model.Report_Result">
+          <ScalarProperty Name="NgayLapHD" ColumnName="NgayLapHD" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

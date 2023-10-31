@@ -286,7 +286,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="ListYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="ThongKeTongTienTheoThangNamVaTinhTrang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Thang" Type="int" Mode="In" />
           <Parameter Name="Nam" Type="int" Mode="In" />
         </Function>
@@ -516,6 +516,14 @@
             <Parameter Name="Thang" Mode="In" Type="Int32" />
             <Parameter Name="Nam" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ThongKe">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Report" ReturnType="Collection(UGANI_1Model.Report_Result)">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="BANAN">
           <Key>
@@ -682,6 +690,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Report_Result">
+          <Property Type="DateTime" Name="NgayLapHD" Nullable="true" />
+          <Property Type="Decimal" Name="TongTien" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -839,7 +851,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ListYear" FunctionName="UGANI_1Model.Store.ListYear" />
-          <FunctionImportMapping FunctionImportName="ThongKeTongTienTheoThangNamVaTinhTrang" FunctionName="UGANI_1Model.Store.ThongKeTongTienTheoThangNamVaTinhTrang" />
+          <FunctionImportMapping FunctionImportName="Report" FunctionName="UGANI_1Model.Store.Report">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UGANI_1Model.Report_Result">
+                <ScalarProperty Name="NgayLapHD" ColumnName="NgayLapHD" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

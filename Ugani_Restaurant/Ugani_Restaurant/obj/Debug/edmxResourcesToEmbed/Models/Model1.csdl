@@ -162,6 +162,14 @@
       <Parameter Name="Thang" Mode="In" Type="Int32" />
       <Parameter Name="Nam" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="ThongKe">
+      <Parameter Name="Thang" Mode="In" Type="Int32" />
+      <Parameter Name="Nam" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Report" ReturnType="Collection(UGANI_1Model.Report_Result)">
+      <Parameter Name="Thang" Mode="In" Type="Int32" />
+      <Parameter Name="Nam" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="BANAN">
     <Key>
@@ -328,4 +336,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="Report_Result">
+    <Property Type="DateTime" Name="NgayLapHD" Nullable="true" />
+    <Property Type="Decimal" Name="TongTien" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
 </Schema>

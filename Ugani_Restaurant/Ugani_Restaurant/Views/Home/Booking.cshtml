@@ -41,10 +41,11 @@
         <label>Ghi chú</label>
         @Html.TextArea("note", null, new { @id = "note", type = "text" })
     </div>
-    <button class="btn btn-primary" id="submitBooking">Đặt bàn</button>
+    <div class="d-flex flex-row gap-2">
+        <button class="btn btn-primary" id="submitBookingTable">Đặt bàn</button>
+        <button class="btn btn-primary" id="submitBookingFoods">Đặt món ăn</button>
+    </div>
 </div>
-
-
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>
@@ -64,7 +65,7 @@
             getTableById(id, date, startTime, endTime);
         });
 
-        $("#submitBooking").click(function () {
+        $("#submitBookingFoods").click(function () {
             table = $("#tableDropdown").val();
             note = $("#note").val();
             $.ajax({
@@ -79,6 +80,28 @@
                 },
                 success: function (response) {
                     window.location.href = "/Home/BookingFoods";
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
+                }
+            });
+        });
+
+        $("#submitBookingTable").click(function () {
+            table = $("#tableDropdown").val();
+            note = $("#note").val();
+            $.ajax({
+                url: "/Home/SubmitBooking",
+                type: "POST",
+                data: {
+                    date: date,
+                    startTime: startTime,
+                    endTime: endTime,
+                    table: table,
+                    note: note
+                },
+                success: function (response) {
+                    alert('Bạn đã đặt bàn thành công!')
                 },
                 error: function () {
                     alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")

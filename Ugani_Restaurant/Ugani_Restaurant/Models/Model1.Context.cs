@@ -58,5 +58,31 @@ namespace Ugani_Restaurant.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("ThongKeTongTienTheoThangNamVaTinhTrang", thangParameter, namParameter);
         }
+    
+        public virtual int ThongKe(Nullable<int> thang, Nullable<int> nam)
+        {
+            var thangParameter = thang.HasValue ?
+                new ObjectParameter("Thang", thang) :
+                new ObjectParameter("Thang", typeof(int));
+    
+            var namParameter = nam.HasValue ?
+                new ObjectParameter("Nam", nam) :
+                new ObjectParameter("Nam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKe", thangParameter, namParameter);
+        }
+    
+        public virtual ObjectResult<Report_Result> Report(Nullable<int> thang, Nullable<int> nam)
+        {
+            var thangParameter = thang.HasValue ?
+                new ObjectParameter("Thang", thang) :
+                new ObjectParameter("Thang", typeof(int));
+    
+            var namParameter = nam.HasValue ?
+                new ObjectParameter("Nam", nam) :
+                new ObjectParameter("Nam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Report_Result>("Report", thangParameter, namParameter);
+        }
     }
 }

@@ -10,6 +10,9 @@
     <table class="table">
         <tr>
             <th class="text-center">
+                STT
+            </th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.AspNetUser.FullName)
             </th>
             <th class="text-center">
@@ -25,28 +28,35 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.NGAYLAPHD)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.TONGTIEN)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.TINHTRANG)
-            </td>
-            <td class="text-center">
-                @Html.ActionLink("Details", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Xác nhận", "Confirm", new { id = item.MAHD }, new { @class = "btn btn-danger btn-confirm", @data_toggle = "modal", @data_target = "#modalConfirm", @data_id = item.MAHD })
-            </td>
-        </tr>
-        }
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <th class="text-center">
+                        @i
+                    </th>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.NGAYLAPHD)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TONGTIEN)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TINHTRANG)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Details", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Xác nhận", "Confirm", new { id = item.MAHD }, new { @class = "btn btn-danger btn-confirm", @data_toggle = "modal", @data_target = "#modalConfirm", @data_id = item.MAHD })
+                    </td>
+                </tr>
+                i++;
+            }
 
+        }
     </table>
 </div>
 
@@ -63,7 +73,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <button type="button" class="btn btn-primary" id="btn-confirm-submit">Xác nhận</button>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+                <button type="button" class="btn btn-primary" id="btn-confirm-submit">Xác nhận</button>
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@
                         <option value="@item">@item</option>
                     }
                 </select>
-                <select id="ddlYear" class="form-control" style="width:140px;">
+                <select id="ddlMonth" class="form-control" style="width:140px;">
                     <option value="0">Chọn tháng</option>
                     @for (int i = 1; i < 13; i++)
                     {
@@ -37,13 +37,19 @@
 
     <script>
 
-            $('#ddlYear').on('change', function () {
-                var year = $(this).val();
+        $('#ddlYear, #ddlMonth').on('change', function () {
+            var year = $('#ddlYear').val();
+            var month = $('#ddlMonth').val();
 
-                $.get('/HOADONs/GetResultReport?year=' + year, function (resp) {
+            // Kiểm tra xem cả hai giá trị đã được chọn
+            if (year != 0 && month != 0) {
+                // Thực hiện yêu cầu $.get
+                $.get('/SystemManagement/GetResultReport?year=' + year + '&month=' + month, function (resp) {
                     ResgisterChart(resp);
                 });
-            });
+            }
+        });
+
 
 
 
@@ -51,8 +57,8 @@
                 var lsLabel = [];
                 var lsDataSource = [];
                 $.each(lsData, function (index, item) {
-                    lsLabel.push(item.MONTH)
-                    lsDataSource.push(item.TOTAL);
+                    lsLabel.push(item.NgayLapHD)
+                    lsDataSource.push(item.TongTien);
                 });
 
                 console.log(lsDataSource);

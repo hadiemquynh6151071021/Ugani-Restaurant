@@ -33,12 +33,12 @@ namespace Ugani_Restaurant.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HOADON hOADON = db.HOADONs.Find(id);
-            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == id).ToList().First();
-            ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == id).ToList();
             if (hOADON == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == id).ToList().First();
+            ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == id).ToList();
             return View(hOADON);
         }
 
@@ -171,6 +171,49 @@ namespace Ugani_Restaurant.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult DeleteBill(int id)
+        {
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HOADON hOADON = db.HOADONs.Find(id);
+            if (hOADON == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("DeleteBill", hOADON);
+        }
+
+        public ActionResult DeleteBillSubmit(int CatId)
+        {
+            if (CatId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HOADON hOADON = db.HOADONs.Find(CatId);
+            if (hOADON == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                List<CHITIETDATBAN> cHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == CatId).ToList();
+                if (cHITIETDATBANs.Count > 0)
+                {
+                    db.CHITIETDATBANs.RemoveRange(cHITIETDATBANs);
+                }
+                List<CHITIETDATMONAN> cHITIETDATMONANs = db.CHITIETDATMONANs.Where(m => m.MAHD == CatId).ToList();
+                if (cHITIETDATMONANs.Count > 0)
+                {
+                    db.CHITIETDATMONANs.RemoveRange(cHITIETDATMONANs);
+                }
+                db.HOADONs.Remove(hOADON);
+                db.SaveChanges();
+                return RedirectToAction("ListBill");
+            }
+        }
 
 
         public ActionResult About()

@@ -240,6 +240,9 @@
     <Compile Include="Models\MONAN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Report_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -499,6 +502,7 @@
     <Content Include="Views\HOADONs\Index.cshtml" />
     <Content Include="Views\Home\ListBill.cshtml" />
     <Content Include="Views\Home\DetailsBill.cshtml" />
+    <Content Include="Views\Home\DeleteBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

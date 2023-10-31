@@ -54,12 +54,25 @@
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>
+
+    var buyButtonClicked = false; // Biến kiểm tra xem đã nhấn nút "buy" chưa
+
     $(document).on('click', '.buy', function () {
-        $(this).closest('.bottom').addClass("clicked");
+        var quantityInput = $(this).siblings('.details').find('.quantity');
+        var quantityValue = parseInt(quantityInput.val());
+
+        if (quantityValue !== 0) {
+            $(this).closest('.bottom').addClass("clicked");
+            buyButtonClicked = true; // Đánh dấu rằng nút "buy" đã được nhấn và giá trị không phải là 0
+        } else {
+            // Nếu giá trị là 0, bạn có thể hiển thị thông báo hoặc thực hiện hành động khác tùy ý
+            alert("Vui lòng chọn số lượng món trước khi nhấn lựa chọn!");
+        }
     });
 
     $(document).on('click', '.remove', function () {
         $(this).closest('.bottom').removeClass("clicked");
+        buyButtonClicked = false; // Đánh dấu rằng nút "buy" đã bị hủy bỏ
     });
 
     var selectedItems = [];
@@ -84,19 +97,25 @@
         
     });
 
+    // Bắt sự kiện khi nút "submit-button" được nhấn
     $('#submit-button').click(function () {
-        $.ajax({
-            url: '/Home/SubmitBookingFoods', // Thay thế 'ControllerName' bằng tên của controller của bạn
-            method: 'POST',
-            data: { selectedItems: selectedItems }, // Gửi dãy selectedItems lên máy chủ
-            success: function (response) {
-                // Xử lý kết quả trả về từ máy chủ (nếu cần)
-                window.location.href = "/Home/ShowBill";
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
+        if (buyButtonClicked) {
+            // Nếu đã nhấn nút "buy," thực hiện công việc
+            $.ajax({
+                url: '/Home/SubmitBookingFoods',
+                method: 'POST',
+                data: { selectedItems: selectedItems },
+                success: function (response) {
+                    window.location.href = "/Home/ShowBill";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            // Nếu chưa nhấn nút "buy," bạn có thể hiển thị thông báo hoặc thực hiện hành động khác tùy ý
+            alert("Vui lòng chọn món trước khi đặt món!");
+        }
     });
 
     // Lấy tất cả các trường nhập số và nút tăng/giảm
@@ -123,10 +142,6 @@
     decrementButtons.forEach(button => {
         button.addEventListener("click", handleDecrement);
     });
-
-
-
-
 </script>
 
 

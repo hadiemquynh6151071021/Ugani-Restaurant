@@ -281,7 +281,7 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="ListYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="ThongKeTongTienTheoThangNamVaTinhTrang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Thang" Type="int" Mode="In" />
     <Parameter Name="Nam" Type="int" Mode="In" />
   </Function>
