@@ -22,7 +22,7 @@
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        <label>Role</label>
+        @Html.LabelFor(m => m.Role, new { @class = "control-label" })
         @Html.DropDownListFor(m => m.Role, ViewBag.Role as SelectList, "Chon quyen", new { @class = "form-control" })
     </div>
     <div class="form-group">

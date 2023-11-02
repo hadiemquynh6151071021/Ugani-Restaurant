@@ -5,7 +5,8 @@ namespace Ugani_Restaurant.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -41,7 +42,8 @@ namespace Ugani_Restaurant.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -49,54 +51,57 @@ namespace Ugani_Restaurant.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu trước khi xác nhận!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Nhớ tôi?")]
         public bool RememberMe { get; set; }
     }
     public class CreateViewModel
     {
-        [Required]
-        [Display(Name = "Role")]
+        [Required(ErrorMessage = "Vui lòng chọn Quyền trước khi xác nhận!")]
+        [Display(Name = "Quyền")]
         public string Role { get; set; }
-        [Required]
-        [Display(Name = "FullName")]
+        [Required(ErrorMessage = "Vui lòng nhập Họ và tên trước khi xác nhận!")]
+        [Display(Name = "Họ và tên")]
         public string FullName { get; set; }
 
-        [Required]
-        [Display(Name = "PhoneNumber")]
+        [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
+        [Display(Name = "Số điện thoại")]
         [Phone]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu trước khi xác nhận!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập lại Mật khẩu trước khi xác nhận!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không khớp với mật khẩu ban đầu!")]
         public string ConfirmPassword { get; set; }
     }
 
     public class EditRoleViewModel
     {
         public string UserId { get; set; } // Id của người dùng cần chỉnh sửa quyền truy cập
-
+        [Required(ErrorMessage = "Vui lòng chọn Quyền trước khi xác nhận!")]
+        [Display(Name = "Quyền")]
         public string Role { get; set; } // Quyền truy cập mới
 
         // Các thuộc tính khác (nếu cần thiết)
@@ -105,48 +110,50 @@ namespace Ugani_Restaurant.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "FullName")]
+        [Required(ErrorMessage = "Vui lòng nhập Họ và tên trước khi xác nhận!")]
+        [Display(Name = "Họ và tên")]
         public string FullName { get; set; }
 
-        [Required]
-        [Display(Name = "PhoneNumber")]
+        [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
+        [Display(Name = "Số điện thoại")]
         [Phone]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu trước khi xác nhận!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập lại Mật khẩu trước khi xác nhận!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không khớp với mật khẩu ban đầu!")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu trước khi xác nhận!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự!", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập lại Mật khẩu trước khi xác nhận!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không khớp với mật khẩu ban đầu!")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -154,7 +161,7 @@ namespace Ugani_Restaurant.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

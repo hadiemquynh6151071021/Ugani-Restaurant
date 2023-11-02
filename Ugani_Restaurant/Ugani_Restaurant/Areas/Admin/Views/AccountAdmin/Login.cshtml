@@ -5,11 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    ViewBag.Title = "Log in";
-}
-
-<h1>Admin Login</h1>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
@@ -47,7 +42,7 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register as a new user", "Register")
+                    @Html.ActionLink("Đăng ký tài khoản mới", "Register")
                 </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>

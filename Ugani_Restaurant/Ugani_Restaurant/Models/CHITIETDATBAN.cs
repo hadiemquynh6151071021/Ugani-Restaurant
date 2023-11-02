@@ -17,6 +17,7 @@ namespace Ugani_Restaurant.Models
         public int STT { get; set; }
         public int MAHD { get; set; }
         public string MABAN { get; set; }
+
         public Nullable<System.DateTime> NGAYDAT { get; set; }
         public Nullable<System.DateTime> GIODATBAN { get; set; }
         public Nullable<System.DateTime> GIOTRABAN { get; set; }

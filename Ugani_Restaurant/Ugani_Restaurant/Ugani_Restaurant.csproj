@@ -208,6 +208,7 @@
     <Compile Include="Models\CHITIETDATMONAN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomDateTimeConverter.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -243,6 +244,7 @@
     <Compile Include="Models\Report_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SourceChart.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -319,6 +321,9 @@
     <Content Include="Content\khonggian\Khonggiangiadinhnho.png" />
     <Content Include="Content\photoHome\12 Of The Best Luxury Family-Friendly Restaurants In London.jpg" />
     <Content Include="Content\photoHome\14 Best Restaurants In Iceland To Visit.jpg" />
+    <Content Include="Content\photoHome\2.jpg" />
+    <Content Include="Content\photoHome\3.jpg" />
+    <Content Include="Content\photoHome\4.2.jpg" />
     <Content Include="Content\photoHome\78422818-cdb1-45db-a489-fe73a1bcd363.jpg" />
     <Content Include="Content\photoHome\A Guide to the Best Thai Restaurants in Denmark.jpg" />
     <Content Include="Content\photoHome\BLESS Restaurant Hamburg.jpg" />

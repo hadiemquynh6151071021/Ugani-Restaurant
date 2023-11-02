@@ -49,7 +49,7 @@
                         @Html.DisplayFor(modelItem => item.TINHTRANG)
                     </td>
                     <td class="text-center">
-                        @Html.ActionLink("Details", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.MAHD }, new { @class = "btn btn-primary" }) |
                         @Html.ActionLink("Xác nhận", "Confirm", new { id = item.MAHD }, new { @class = "btn btn-danger btn-confirm", @data_toggle = "modal", @data_target = "#modalConfirm", @data_id = item.MAHD })
                     </td>
                 </tr>

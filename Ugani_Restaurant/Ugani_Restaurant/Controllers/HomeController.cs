@@ -133,15 +133,16 @@ namespace Ugani_Restaurant.Controllers
             string idKH = User.Identity.GetUserId();
             HOADON hOADON = db.HOADONs.Where(m => m.MAKH == idKH).OrderByDescending(m => m.NGAYLAPHD).ToList().First();
             List<CHITIETDATMONAN> cHITIETDATMONANs = db.CHITIETDATMONANs.Where(m => m.MAHD == hOADON.MAHD).ToList();
-            ViewBag.CHITIETDATBANs = db.CHITIETDATBANs.Where(m => m.MAHD == hOADON.MAHD).ToList().First();
+            CHITIETDATBAN cHITIETDATBAN = db.CHITIETDATBANs.Where(m => m.MAHD == hOADON.MAHD).ToList().First();
             ViewBag.CHITIETDATMONs = db.CHITIETDATMONANs.Where(m => m.MAHD == hOADON.MAHD).ToList();
             ViewBag.ChiTietDatMon = cHITIETDATMONANs;
+            ViewBag.CHITIETDATBANs = cHITIETDATBAN;
             decimal tongTien = 0;
             foreach(var item in cHITIETDATMONANs)
             {
                 tongTien = (decimal)(tongTien + (item.MONAN.DONGIA*item.SOLUONG));
             }
-            hOADON.TONGTIEN = tongTien;
+            hOADON.TONGTIEN = tongTien + cHITIETDATBAN.BANAN.LOAIKHONGGIAN.DONGIA;
             db.Entry(hOADON).State = EntityState.Modified;
             db.SaveChanges();
             if (hOADON == null)
