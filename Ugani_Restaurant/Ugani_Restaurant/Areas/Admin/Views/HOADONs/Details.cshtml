@@ -37,7 +37,7 @@
                         @item.MONAN.TENMONAN
                     </td>
                     <td class="text-center">
-                        @item.MONAN.DONGIA @item.MONAN.DVT
+                        @Math.Round(@item.MONAN.DONGIA, 0).ToString("#,##0").Replace(',', '.') @item.MONAN.DVT
                     </td>
                     <td class="text-center">
                         @item.SOLUONG
@@ -48,7 +48,7 @@
         </table>
         <div class="w-100 text-center">
             @Html.DisplayNameFor(model => model.TONGTIEN)<br />
-            @Html.DisplayFor(model => model.TONGTIEN)
+            @Math.Round(Model.TONGTIEN.Value, 0).ToString("#,##0").Replace(',', '.') đ
         </div>
     </div>
 </div>

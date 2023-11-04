@@ -7,7 +7,7 @@
 
 <h2>Thêm không gian</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "LOAIKHONGGIANs", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     

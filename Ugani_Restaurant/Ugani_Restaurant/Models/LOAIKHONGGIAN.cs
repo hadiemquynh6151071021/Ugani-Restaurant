@@ -21,7 +21,7 @@ namespace Ugani_Restaurant.Models
         {
             this.BANANs = new HashSet<BANAN>();
         }
-    
+        [DisplayName("Tên không gian")]
         public int MALOAIKHONGGIAN { get; set; }
         [DisplayName("Tên không gian")]
         [Required(ErrorMessage = "Vui lòng nhập Tên không gian trước khi xác nhận!")]

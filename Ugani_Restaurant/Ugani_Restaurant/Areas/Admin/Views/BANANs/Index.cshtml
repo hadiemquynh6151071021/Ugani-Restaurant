@@ -2,14 +2,20 @@
 @{
     var user = User.Identity.Name;
     var isAdmin = User.IsInRole("Admin");
+
+
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (isAdmin)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            MA BAN
+            @Html.DisplayNameFor(model => model.MABAN)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LOAIKHONGGIAN.TENLOAIKHONGGIAN)
@@ -31,10 +37,10 @@
             </td>
             @if (isAdmin)
             {
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.MABAN.Trim() }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.MABAN.Trim() }, new { @class = "btn btn-danger btn-delete", @data_toggle = "modal", @data_target = "#modalDelete", @data_id = item.MABAN.Trim()})
-        </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MABAN.Trim() }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MABAN.Trim() }, new { @class = "btn btn-danger btn-delete", @data_toggle = "modal", @data_target = "#modalDelete", @data_id = item.MABAN.Trim() })
+                </td>
             }
 
         </tr>
@@ -77,13 +83,13 @@
         });
 
         // Gọi hàm xử lý sự kiện click từ button khác
-        $('#btn-delete-submit').click(function (e) {       
+        $('#btn-delete-submit').click(function (e) {
             $.ajax({
                 type: 'GET',
                 url: '/Admin/BANANs/DeleteSubmit',
                 data: { CatId: id },
                 success: function (response) {
-                    
+
                 }
             });
         });
@@ -102,6 +108,6 @@
 
     });
 
-    
+
 
 </script>

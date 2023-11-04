@@ -6,7 +6,7 @@ namespace Ugani_Restaurant.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -43,7 +43,7 @@ namespace Ugani_Restaurant.Models
     public class ForgotViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -52,7 +52,7 @@ namespace Ugani_Restaurant.Models
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -76,11 +76,11 @@ namespace Ugani_Restaurant.Models
 
         [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
         [Display(Name = "Số điện thoại")]
-        [Phone]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ!")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -116,11 +116,11 @@ namespace Ugani_Restaurant.Models
 
         [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
         [Display(Name = "Số điện thoại")]
-        [Phone]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ!")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -140,7 +140,7 @@ namespace Ugani_Restaurant.Models
     public class ResetPasswordViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -162,7 +162,7 @@ namespace Ugani_Restaurant.Models
     public class ForgotPasswordViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thêm món ăn</h2>
-@using (Html.BeginForm("Create", "MONANs", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -33,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HINHANH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.HINHANH, new { type = "file", @class = "form-control" })
+                @Html.EditorFor(model => model.HINHANH, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HINHANH, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,3 +62,7 @@
         </div>
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

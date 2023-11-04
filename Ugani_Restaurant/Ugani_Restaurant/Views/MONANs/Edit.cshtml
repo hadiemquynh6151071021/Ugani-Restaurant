@@ -1,12 +1,13 @@
 ﻿@model Ugani_Restaurant.Models.MONAN
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thêm món ăn</h2>
-@using (Html.BeginForm("Create", "MONANs", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -14,6 +15,8 @@
         <h4>MONAN</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MAMONAN)
+
         <div class="form-group">
             @Html.LabelFor(model => model.MALOAIMON, "MALOAIMON", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HINHANH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.HINHANH, new { type = "file", @class = "form-control" })
+                @Html.EditorFor(model => model.HINHANH, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HINHANH, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,8 +59,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

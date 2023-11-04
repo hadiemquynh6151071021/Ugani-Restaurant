@@ -183,6 +183,7 @@
     <Compile Include="Controllers\HOADONsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MONANsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -325,15 +326,19 @@
     <Content Include="Content\photoHome\3.jpg" />
     <Content Include="Content\photoHome\4.2.jpg" />
     <Content Include="Content\photoHome\78422818-cdb1-45db-a489-fe73a1bcd363.jpg" />
+    <Content Include="Content\photoHome\7c22075c-f2c7-444a-8c50-11a2db530e86.jpg" />
+    <Content Include="Content\photoHome\8c3f6d17-be13-4d25-b29a-6596a936e135.jpg" />
     <Content Include="Content\photoHome\A Guide to the Best Thai Restaurants in Denmark.jpg" />
     <Content Include="Content\photoHome\BLESS Restaurant Hamburg.jpg" />
     <Content Include="Content\photoHome\How to Price Food to Sell Online.png" />
+    <Content Include="Content\photoHome\Japanese Foods.jpg" />
     <Content Include="Content\photoHome\Ramen.jpg" />
     <Content Include="Content\photoHome\Roasted Garlic Pasta with Tomatoes and Spinach.jpg" />
     <Content Include="Content\photoHome\Shushi.png" />
     <Content Include="Content\photoHome\The 11 Montreal Restaurants You%27ll Only Be Able To Afford To Go To Once In Your Life.jpg" />
     <Content Include="Content\photoHome\Ugani.png" />
     <Content Include="Content\photoHome\大人デート向けの隠れ家系焼き鳥！今、恵比寿で注目の人気店はここ！！.jpg" />
+    <Content Include="Content\photoHome\鬼灯 by ニーナ （ID：3620049）- 写真共有サイト_PHOTOHITO.jpg" />
     <Content Include="Content\StyleCSS\layout.css">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -508,6 +513,11 @@
     <Content Include="Views\Home\ListBill.cshtml" />
     <Content Include="Views\Home\DetailsBill.cshtml" />
     <Content Include="Views\Home\DeleteBill.cshtml" />
+    <Content Include="Views\MONANs\Create.cshtml" />
+    <Content Include="Views\MONANs\Delete.cshtml" />
+    <Content Include="Views\MONANs\Details.cshtml" />
+    <Content Include="Views\MONANs\Edit.cshtml" />
+    <Content Include="Views\MONANs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

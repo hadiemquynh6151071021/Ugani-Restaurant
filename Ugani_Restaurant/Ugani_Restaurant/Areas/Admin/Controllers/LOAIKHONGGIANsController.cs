@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -33,14 +34,34 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MALOAIKHONGGIAN,TENLOAIKHONGGIAN,IMG,MOTA,DONGIA,DVT")] LOAIKHONGGIAN lOAIKHONGGIAN)
+        public ActionResult Create([Bind(Include = "MALOAIKHONGGIAN,TENLOAIKHONGGIAN,IMG,MOTA,DONGIA,DVT")] LOAIKHONGGIAN lOAIKHONGGIAN, HttpPostedFileBase IMG)
         {
             if (ModelState.IsValid)
             {
-                db.LOAIKHONGGIANs.Add(lOAIKHONGGIAN);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if (IMG.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(IMG.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Content/khonggian"), _FileName);
+                        IMG.SaveAs(_path);
+                        lOAIKHONGGIAN.IMG = _FileName;
+                    }
+                    db.LOAIKHONGGIANs.Add(lOAIKHONGGIAN);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    ViewBag.Message = "không thành công!!";
+                }
             }
+            //if (ModelState.IsValid)
+            //{
+            //    db.LOAIKHONGGIANs.Add(lOAIKHONGGIAN);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
             return View(lOAIKHONGGIAN);
         }
