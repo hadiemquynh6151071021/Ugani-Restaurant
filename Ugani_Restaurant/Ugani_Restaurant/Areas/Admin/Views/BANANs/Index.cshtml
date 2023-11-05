@@ -8,7 +8,7 @@
 @if (isAdmin)
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
     </p>
 }
 
@@ -38,7 +38,7 @@
             @if (isAdmin)
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MABAN.Trim() }, new { @class = "btn btn-primary" }) |
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.MABAN.Trim() }, new { @class = "btn btn-primary" }) |*@
                     @Html.ActionLink("Delete", "Delete", new { id = item.MABAN.Trim() }, new { @class = "btn btn-danger btn-delete", @data_toggle = "modal", @data_target = "#modalDelete", @data_id = item.MABAN.Trim() })
                 </td>
             }
@@ -89,7 +89,7 @@
                 url: '/Admin/BANANs/DeleteSubmit',
                 data: { CatId: id },
                 success: function (response) {
-
+                    alert(response);
                 }
             });
         });

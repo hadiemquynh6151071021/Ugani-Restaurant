@@ -157,13 +157,29 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return PartialView("Delete", mONAN);
         }
 
-        public ActionResult DeleteSubmit(int CatId)
+        public string DeleteSubmit(int CatId)
         {
             MONAN mONAN = db.MONANs.Find(CatId);
+            int count = db.CHITIETDATMONANs.Where(m => m.MONAN.MAMONAN == CatId).ToList().Count;
+
+            if (count > 0)
+            {
+                return "Không thể xóa món ăn này vì có " + count + " bản đặt món liên quan.";
+            }
+
+            // Nếu count <= 0, tiến hành xóa loại không gian và chuyển hướng đến trang Index
             db.MONANs.Remove(mONAN);
             db.SaveChanges();
-            return RedirectToAction("Index", "SystemManagement", new { area = "Admin" });
+            return "Bạn đã xóa thành công!";
         }
+
+        //public ActionResult DeleteSubmit(int CatId)
+        //{
+        //    MONAN mONAN = db.MONANs.Find(CatId);
+        //    db.MONANs.Remove(mONAN);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index", "SystemManagement", new { area = "Admin" });
+        //}
 
         // GET: Admin/MONANs/Delete/5
         //public ActionResult Delete(int? id)

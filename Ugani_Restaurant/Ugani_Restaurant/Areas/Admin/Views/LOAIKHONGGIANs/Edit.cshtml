@@ -7,7 +7,7 @@
 
 <h2>Chỉnh sửa</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "LOAIKHONGGIANs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -27,7 +27,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IMG, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IMG, new { type = "file", @class = "form-control" })
+                <img src="~/Content/khonggian/@Model.IMG" width="30%" height="30%" />
+                @Html.Hidden("oldimage", @Model.IMG)
+                @Html.TextBoxFor(model => model.IMG, null, new { type = "file", @class = "form-control", id = "formFile" })
                 @Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -22,6 +22,7 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return View(db.LOAIKHONGGIANs.ToList());
         }
 
+        
 
         // GET: Admin/LOAIKHONGGIANs/Create
         public ActionResult Create()
@@ -86,13 +87,37 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MALOAIKHONGGIAN,TENLOAIKHONGGIAN,IMG,MOTA,DONGIA,DVT")] LOAIKHONGGIAN lOAIKHONGGIAN)
+        public ActionResult Edit([Bind(Include = "MALOAIKHONGGIAN,TENLOAIKHONGGIAN,IMG,MOTA,DONGIA,DVT")] LOAIKHONGGIAN lOAIKHONGGIAN,  HttpPostedFileBase IMG, FormCollection form)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(lOAIKHONGGIAN).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if (IMG != null)
+                    {
+                        string _FileName = Path.GetFileName(IMG.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Content/khonggian"), _FileName);
+                        IMG.SaveAs(_path);
+                        lOAIKHONGGIAN.IMG = _FileName;
+
+                        //get path of old image deleting it
+                        _path = Path.Combine(Server.MapPath("~/Content/khonggian"), form["oldimage"]);
+                        if (System.IO.File.Exists(_path))
+                        {
+                            System.IO.File.Delete(_path);
+                        }
+                    }
+                    else
+                        lOAIKHONGGIAN.IMG = form["oldimage"];
+                    db.Entry(lOAIKHONGGIAN).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "SystemManagement", new { area = "Admin" });
+                }
+                catch
+                {
+                    ViewBag.Message = "Không thành công!!";
+                }
+                return RedirectToAction("Index", "SystemManagement", new { area = "Admin" });
             }
             return View(lOAIKHONGGIAN);
         }
@@ -102,16 +127,23 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
         {
             // Lấy thông tin về vai trò có id tương ứng và trả về một PartialView chứa form Edit
             LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(id);// Lấy thông tin về vai trò từ id
-
             return PartialView("Delete", lOAIKHONGGIAN);
         }
 
-        public ActionResult DeleteSubmit(int CatId)
+        public string DeleteSubmit(int CatId)
         {
             LOAIKHONGGIAN lOAIKHONGGIAN = db.LOAIKHONGGIANs.Find(CatId);
+            int count = db.CHITIETDATBANs.Where(m => m.BANAN.LOAIKHONGGIAN.MALOAIKHONGGIAN == CatId).ToList().Count;
+
+            if (count > 0)
+            {
+                return "Không thể xóa loại không gian này vì có " + count + " bản đặt bàn liên quan.";
+            }
+
+            // Nếu count <= 0, tiến hành xóa loại không gian và chuyển hướng đến trang Index
             db.LOAIKHONGGIANs.Remove(lOAIKHONGGIAN);
             db.SaveChanges();
-            return RedirectToAction("Index");   
+            return "Bạn đã xóa thành công!"; 
         }
 
 

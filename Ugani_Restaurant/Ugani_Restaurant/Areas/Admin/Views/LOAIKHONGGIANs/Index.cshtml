@@ -8,7 +8,7 @@
 <h2>Danh sách không gian</h2>
 
 <p>
-    @Html.ActionLink("Thêm mới", "Create")
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -18,7 +18,7 @@
         <th width="30%" height="30%">
             @Html.DisplayNameFor(model => model.IMG)
         </th>
-        <th>
+        <th style="width:300px;">
             @Html.DisplayNameFor(model => model.MOTA)
         </th>
         <th>
@@ -36,7 +36,7 @@
             <td>
                 <img src="~/Content/khonggian/@item.IMG" class="img-fluid" />
             </td>
-            <td>
+            <td style="width:300px;">
                 @Html.DisplayFor(modelItem => item.MOTA)
             </td>
             <td>
@@ -90,6 +90,7 @@
                 url: '/Admin/LOAIKHONGGIANs/DeleteSubmit',
                 data: { CatId: id },
                 success: function (response) {
+                    alert(response);
                     window.location.reload();
                 }
             });

@@ -6,7 +6,7 @@
 @if (isAdmin)
 {
     <p>
-        @Html.ActionLink("Thêm mới", "Create")
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
     </p>
 }
 
@@ -96,6 +96,7 @@
                 url: '/Admin/MONANs/DeleteSubmit',
                 data: { CatId: id },
                 success: function (response) {
+                    alert(response)
                     window.location.reload();
                 }
             });

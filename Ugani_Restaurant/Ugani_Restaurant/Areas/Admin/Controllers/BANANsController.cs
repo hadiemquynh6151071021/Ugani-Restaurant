@@ -41,7 +41,7 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             {
                 db.BANANs.Add(bANAN);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "SystemManagement");
             }
 
             ViewBag.MAKHONGGIAN = new SelectList(db.LOAIKHONGGIANs, "MALOAIKHONGGIAN", "TENLOAIKHONGGIAN", bANAN.MAKHONGGIAN);
@@ -89,12 +89,20 @@ namespace Ugani_Restaurant.Areas.Admin.Controllers
             return PartialView("Delete", bANAN);
         }
 
-        public ActionResult DeleteSubmit(string CatId)
+        public string DeleteSubmit(string CatId)
         {
             BANAN bANAN = db.BANANs.Find(CatId);
+            int count = db.CHITIETDATBANs.Where(m => m.BANAN.MABAN.Trim() == CatId.Trim()).ToList().Count;
+
+            if (count > 0)
+            {
+                return "Không thể xóa loại không gian này vì có " + count + " bản đặt bàn liên quan.";
+            }
+
+            // Nếu count <= 0, tiến hành xóa loại không gian và chuyển hướng đến trang Index
             db.BANANs.Remove(bANAN);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return "Bạn đã xóa thành công!";
         }
 
         // GET: Admin/BANANs/Delete/5
