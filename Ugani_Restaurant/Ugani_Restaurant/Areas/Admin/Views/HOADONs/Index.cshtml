@@ -43,7 +43,7 @@
                         @Html.DisplayFor(modelItem => item.NGAYLAPHD)
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.TONGTIEN)
+                        @Math.Round(item.TONGTIEN.Value, 0).ToString("#,##0").Replace(',', '.') đ
                     </td>
                     <td class="text-center">
                         @Html.DisplayFor(modelItem => item.TINHTRANG)

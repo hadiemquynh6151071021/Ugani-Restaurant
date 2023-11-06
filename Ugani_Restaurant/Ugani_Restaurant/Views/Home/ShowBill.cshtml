@@ -17,7 +17,7 @@
             @Html.DisplayNameFor(model => model.NGAYLAPHD)
             @Html.DisplayFor(model => model.NGAYLAPHD)
         </div>
-        <p class="text-center fw-bold"> @ViewBag.CHITIETDATBANs.BANAN.LOAIKHONGGIAN.TENLOAIKHONGGIAN - @ViewBag.CHITIETDATBANs.BANAN.MABAN</p>
+        <p class="text-center fw-bold"> @ViewBag.CHITIETDATBANs.BANAN.LOAIKHONGGIAN.TENLOAIKHONGGIAN - @ViewBag.CHITIETDATBANs.BANAN.MABAN - @Math.Round(@ViewBag.CHITIETDATBANs.BANAN.LOAIKHONGGIAN.DONGIA, 0).ToString("#,##0") đ</p>
         <table class="table" style="table-layout: fixed;">
             <tr>
                 <th class="text-center">
@@ -37,7 +37,7 @@
                         @item.MONAN.TENMONAN
                     </td>
                     <td class="text-center">
-                        @item.MONAN.DONGIA @item.MONAN.DVT
+                        @Math.Round(@item.MONAN.DONGIA, 0).ToString("#,##0").Replace(',', '.') @item.MONAN.DVT
                     </td>
                     <td class="text-center">
                         @item.SOLUONG

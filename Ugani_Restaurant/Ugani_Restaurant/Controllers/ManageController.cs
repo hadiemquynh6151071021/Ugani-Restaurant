@@ -15,6 +15,7 @@ namespace Ugani_Restaurant.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private UGANI_1Entities db = new UGANI_1Entities();
 
         public ManageController()
         {
@@ -54,6 +55,7 @@ namespace Ugani_Restaurant.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            ViewBag.Account = db.AspNetUsers.Find(User.Identity.GetUserId());
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

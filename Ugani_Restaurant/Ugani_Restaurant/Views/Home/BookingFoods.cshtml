@@ -81,7 +81,7 @@
         var idKH = $(this).data("idkh"); // Lấy id Khách hàng
         var itemID = parseInt($(this).data("itemid")); // Lấy ID món ăn từ dữ liệu HTML hoặc thuộc tính khác
         var itemName = $(this).siblings('.details').find('.itemName').text(); // Lấy tên món ăn
-        var itemPrice = parseFloat($(this).siblings('.details').find('.itemPrice').text()); // Lấy giá món ăn
+        //var itemPrice = parseFloat($(this).siblings('.details').find('.itemPrice').text()); // Lấy giá món ăn
         var itemNumber = parseInt($(this).siblings('.details').find('.quantity').val()); // Lấy số lượng món muốn đặt
         var date = new Date();
 
@@ -89,7 +89,7 @@
             makh: idKH,
             mamonan: itemID,
             tenmonan: itemName,
-            dongia: itemPrice,
+            //dongia: itemPrice,
             soluong: itemNumber,
             ngaydat: date.toUTCString()
         };
