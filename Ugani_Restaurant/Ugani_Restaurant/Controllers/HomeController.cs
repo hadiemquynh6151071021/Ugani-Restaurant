@@ -42,11 +42,17 @@ namespace Ugani_Restaurant.Controllers
             return View(hOADON);
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult Booking()
         {
             return View(db.LOAIKHONGGIANs.ToList());
         }
 
+        public ActionResult Menu()
+        {
+            ViewBag.LOAIMON = db.LOAIMONs.ToList();
+            return View(db.MONANs.ToList());
+        }
         public ActionResult BookingFoods()
         {
             ViewBag.LOAIMON = db.LOAIMONs.ToList();

@@ -73,45 +73,55 @@
         $("#submitBookingFoods").click(function () {
             table = $("#tableDropdown").val();
             note = $("#note").val();
-            $.ajax({
-                url: "/Home/SubmitBooking",
-                type: "POST",
-                data: {
-                    date: date,
-                    startTime: startTime,
-                    endTime: endTime,
-                    table: table,
-                    note: note
-                },
-                success: function (response) {
-                    window.location.href = "/Home/BookingFoods";
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
-                }
-            });
+            if (!table) {
+                alert("Vui lòng chọn bàn trước khi xác nhận!");
+            }
+            else {
+                $.ajax({
+                    url: "/Home/SubmitBooking",
+                    type: "POST",
+                    data: {
+                        date: date,
+                        startTime: startTime,
+                        endTime: endTime,
+                        table: table,
+                        note: note
+                    },
+                    success: function (response) {
+                        window.location.href = "/Home/BookingFoods";
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
+                    }
+                });
+            }
         });
 
         $("#submitBookingTable").click(function () {
             table = $("#tableDropdown").val();
             note = $("#note").val();
-            $.ajax({
-                url: "/Home/SubmitBooking",
-                type: "POST",
-                data: {
-                    date: date,
-                    startTime: startTime,
-                    endTime: endTime,
-                    table: table,
-                    note: note
-                },
-                success: function (response) {
-                    alert('Bạn đã đặt bàn thành công!')
-                },
-                error: function () {
-                    alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
-                }
-            });
+            if (!table) {
+                alert("Vui lòng chọn bàn trước khi xác nhận!");
+            }
+            else {
+                $.ajax({
+                    url: "/Home/SubmitBooking",
+                    type: "POST",
+                    data: {
+                        date: date,
+                        startTime: startTime,
+                        endTime: endTime,
+                        table: table,
+                        note: note
+                    },
+                    success: function (response) {
+                        window.location.href = "/Home/ShowBill";
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi trong quá trình đạt bàn. Mời bạn quay lại sau ít phút!")
+                    }
+                });
+            }
         });
 
         function getTableById(idKG, date, startTime, endTime) {
@@ -136,25 +146,52 @@
     flatpickr("#datepicker", {
         enableTime: false,
         dateFormat: "Y-m-d",
-        /*minDate: new Date().fp_incr(2),*/  // Đặt ngày tối thiểu là ngày hiện tại + 2 ngày
+        minDate: new Date().fp_incr(2),  // Đặt ngày tối thiểu là ngày hiện tại + 2 ngày
         defaultDate: new Date().fp_incr(2), // Đặt giá trị mặc định là ngày hiện tại + 2 ngày
     });
 
-    flatpickr("#startTime", {
-        enableTime: true, // Cho phép chọn giờ cho thẻ giờ bắt đầu
-        noCalendar: true, // Ẩn lịch
-        dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
-        minTime: "08:00",  // Giờ tối thiểu là 8:00 AM
-        maxTime: "20:00"   // Giờ tối đa là 8:00 PM
+    const startTimePicker = flatpickr("#startTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "08:00",
+        maxTime: "20:00",
+        onClose: function (selectedDates, dateStr, instance) {
+            const endTimeInput = document.querySelector("#endTime");
+
+            if (endTimeInput.value) {
+                const startTime = instance.parseDate(dateStr, "H:i");
+                const endTime = instance.parseDate(endTimeInput.value, "H:i");
+
+                if (startTime >= endTime) {
+                    alert("Giờ bắt đầu phải nhỏ hơn giờ kết thúc.");
+                    instance.clear();
+                }
+            }
+        }
     });
 
-    flatpickr("#endTime", {
-        enableTime: true, // Cho phép chọn giờ cho thẻ giờ kết thúc
-        noCalendar: true, // Ẩn lịch
-        dateFormat: "H:i", // Định dạng giờ (tuỳ chỉnh)
-        minTime: "09:00",  // Giờ tối thiểu là 8:00 AM
-        maxTime: "22:00"   // Giờ tối đa là 8:00 PM
+    const endTimePicker = flatpickr("#endTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "09:00",
+        maxTime: "22:00",
+        onClose: function (selectedDates, dateStr, instance) {
+            const startTimeInput = document.querySelector("#startTime");
+
+            if (startTimeInput.value) {
+                const endTime = instance.parseDate(dateStr, "H:i");
+                const startTime = instance.parseDate(startTimeInput.value, "H:i");
+
+                if (endTime <= startTime) {
+                    alert("Giờ kết thúc phải lớn hơn giờ bắt đầu.");
+                    instance.clear();
+                }
+            }
+        }
     });
+
 
 </script>
 

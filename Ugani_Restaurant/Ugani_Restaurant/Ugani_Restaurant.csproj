@@ -518,6 +518,7 @@
     <Content Include="Views\MONANs\Details.cshtml" />
     <Content Include="Views\MONANs\Edit.cshtml" />
     <Content Include="Views\MONANs\Index.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -42,6 +42,7 @@ namespace Ugani_Restaurant.Models
         [Required(ErrorMessage = "Vui lòng nhập lại Mật khẩu trước khi xác nhận!")]
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
+        [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số và bắt đầu bằng số 0.")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }

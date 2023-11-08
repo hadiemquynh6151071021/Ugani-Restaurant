@@ -77,6 +77,7 @@ namespace Ugani_Restaurant.Models
         [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
         [Display(Name = "Số điện thoại")]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ!")]
+        [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số và bắt đầu bằng số 0.")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
@@ -117,6 +118,7 @@ namespace Ugani_Restaurant.Models
         [Required(ErrorMessage = "Vui lòng nhập Số điện thoại trước khi xác nhận!")]
         [Display(Name = "Số điện thoại")]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ!")]
+        [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số và bắt đầu bằng số 0.")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập Email trước khi xác nhận!")]
