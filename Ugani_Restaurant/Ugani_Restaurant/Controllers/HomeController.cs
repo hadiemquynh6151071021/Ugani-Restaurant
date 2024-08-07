@@ -18,6 +18,8 @@ namespace Ugani_Restaurant.Controllers
             return View();
         }
 
+        
+
         public ActionResult ListBill()
         {
             string makh = User.Identity.GetUserId();
